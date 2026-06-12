@@ -1,0 +1,210 @@
+/* css/add_prize.css */
+.form-container {
+    background-color: #111;
+    padding: 25px;
+    border: 1px solid #00f2ff;
+    color: #fff;
+    max-width: 600px;
+    margin: 20px auto;
+    border-radius: 4px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #00f2ff;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    background: #222;
+    border: 1px solid #444;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    border-color: #00f2ff;
+    outline: none;
+}
+
+button {
+    background: #00f2ff;
+    color: #000;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    font-size: 1rem;
+}
+
+button:hover {
+    background: #00ccff;
+}
+
+/* --- 【追加】店舗タグ（バッチ）のスタイル --- */
+.shop-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+    min-height: 30px;
+}
+
+.shop-tag {
+    background-color: #00f2ff;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.shop-tag button {
+    background: none;
+    border: none;
+    color: #000;
+    margin-left: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    width: auto;
+    padding: 0;
+    font-size: 1rem;
+}
+
+.shop-add-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.shop-select {
+    flex-grow: 1;
+}
+
+.btn-add {
+    width: auto !important;
+    background: #444;
+    color: #fff;
+    border: 1px solid #00f2ff;
+}
+/* ------------------------------------------ */
+
+.gallery-input-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+#add-gallery-btn {
+    background: #444;
+    color: #fff;
+    border: 1px dashed #00f2ff;
+    padding: 10px;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+button[type="submit"] {
+    margin-top: 10px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 15px;
+    color: #00f2ff;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+    color: #fff;
+}
+
+label.required::after {
+    content: " ※";
+    color: #ff4444;
+    font-weight: bold;
+}
+
+.error-container {
+    color: #ff4444;
+    border: 1px solid #ff4444;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: rgba(255, 68, 68, 0.1);
+    border-radius: 4px;
+}
+
+.error-container p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+.error-msg {
+    display: block;
+    color: #ff4444;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+.new-title-box {
+    border: 1px solid #00f2ff;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.new-title-box p {
+    color: #00f2ff;
+    margin-bottom: 10px;
+}
+
+.new-title-field {
+    margin-bottom: 8px;
+}
+
+.new-title-field label {
+    display: inline-block;
+    width: 80px;
+    color: #fff;
+}
+
+.new-title-field input {
+    width: 200px;
+}
+
+/* 追加ボタン専用のサイズ調整 */
+#addShopBtn {
+    width: auto !important; /* ボタン全体のwidth: 100%を上書きして自動幅にする */
+    min-width: 80px;        /* 最低限の幅を確保 */
+    padding: 10px 20px;     /* パディングを調整して小さくする */
+}
+
+/* セレクトボックスとボタンを横並びにするための調整 */
+.shop-add-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.shop-select {
+    flex-grow: 1; /* セレクトボックスは残り幅をすべて使う */
+}

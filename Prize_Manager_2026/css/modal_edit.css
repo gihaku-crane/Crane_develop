@@ -1,0 +1,176 @@
+/* モーダル表示制御用の隠しチェックボックス */
+.modal-checker {
+    display: none;
+}
+
+/* 背景グレー透過（モーダル表示中） */
+.modal-overlay {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* 80%の黒で透過 */
+    z-index: 9999; /* ページ最前面に表示 */
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto; /* コンテンツが長い場合スクロール可能に */
+    z-index: 99999; /* 非常に大きな値にして最前面にする */
+}
+
+/* ボタンを横並びにするためのスタイル */
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px; /* 保存ボタンとの間隔 */
+}
+
+.btn-cancel {
+    background: #444;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* モーダル本体のスタイル */
+.modal-content {
+    background: #1c2128;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
+    max-height: 80vh; /* 画面高さの80%を上限にする */
+    overflow-y: auto;  /* 中身が溢れたらスクロールさせる */
+}
+
+/* タグエリアのスタイル */
+.shop-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+    min-height: 40px; /* 中身がなくても領域を確保 */
+    padding: 5px;
+    border: 1px dashed #30363d; /* 領域を分かりやすくする */
+    border-radius: 4px;
+}
+
+.shop-tag {
+    background: #30363d;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    font-size: 0.85em;
+}
+
+.remove-shop {
+    background: none;
+    border: none;
+    color: #ff4d4d;
+    margin-left: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* フォーム要素の余白調整 */
+.form-group { margin-bottom: 15px; }
+.form-group label { font-size: 0.9em; color: #8b949e; margin-bottom: 4px; display: block; }
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 8px;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    color: #fff;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* モーダルコンテンツのフォーム全体を左寄せに */
+.modal-content form {
+    text-align: left; /* 中身のテキストやラベルを左寄せ */
+}
+
+.form-group label {
+    display: block;
+    text-align: left; /* ラベルのテキストを左寄せ */
+    margin-bottom: 5px;
+}
+
+/* 入力欄の幅を調整して整える */
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box; /* paddingを含めて幅を計算させる */
+    display: block;
+}
+
+/* チェックボックスがONになったらモーダルを表示 */
+.modal-checker:checked ~ .modal-overlay {
+    opacity: 1;              /* 不透明にする */
+    visibility: visible;     /* 表示状態にする */
+}
+
+/* モーダル本体のスタイル */
+.modal-content {
+    background: #1c2128;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px; /* 必要に応じて調整 */
+    color: #fff;
+    border: 1px solid #30363d;
+}
+
+/* モーダルの中身（画像と照準）の配置エリア */
+.modal-content {
+    position: relative;      /* 子要素の起点の起点 */
+    max-width: 80%;          /* 画面の8割を超えないようにする */
+    text-align: left;      /* 文字があれば左寄せ */
+}
+
+/* 重心画像とクロスヘアを載せる枠組み */
+.gravity-image-container {
+    position: relative;               /* 照準線はこの要素を基準に配置 */
+    display: inline-block;            /* 画像のサイズに合わせる */
+    border: 1px solid var(--accent-color); /* 画像を囲う細い枠線 */
+    border-radius: 4px;               /* 枠の角を丸める */
+    overflow: hidden;                 /* はみ出しを防止 */
+}
+
+/* モーダル内の画像 */
+.gravity-image-container img {
+    display: block;          /* 下に謎の隙間ができるのを防ぐ */
+    max-width: 100%;         /* 親要素の幅に合わせる */
+    height: auto;            /* 比率を維持 */
+}
+
+/* モーダル右上の「×」ボタン */
+.btn-close {
+    position: absolute;      /* モーダル本体の右上に配置 */
+    top: -35px;              /* 画像の外側（上）に配置 */
+    right: 0;                /* 右端に合わせる */
+    color: #fff;             /* 白い×印 */
+    font-size: 30px;         /* 大きく押しやすく */
+    cursor: pointer;         /* クリック可能を明示 */
+}
+
+/* --- メインアクションエリア：保存や削除を行う操作ボタン --- */
+.main-action-area {
+    display: flex;           /* ボタンを横並びにする */
+    justify-content: flex-end; /* 右端に寄せる */
+    gap: 12px;               /* ボタン同士の隙間 */
+    margin-top: 5px;         /* スペック項目との間の微調整 */
+}
+
+/* item_detail.css に追記 */
+#openEditModal {
+    position: relative;
+    z-index: 9999;
+}

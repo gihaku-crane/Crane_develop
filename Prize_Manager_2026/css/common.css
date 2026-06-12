@@ -1,0 +1,112 @@
+* { box-sizing: border-box; }
+
+:root {
+    --bg-color: #0d1117;
+    --accent-color: #00d4ff;
+    --text-main: #ffffff;
+    --text-sub: #94a3b8;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+}
+
+header {
+    position: relative;
+    overflow: hidden;
+    height: 160px;
+    z-index: 10;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.header-banner {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url('../img/banner.png');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+.header-banner::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+
+.header-content {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+}
+
+.header-title { font-size: 24px; color: var(--accent-color); text-shadow: 0 0 10px rgba(0, 212, 255, 0.8); }
+.header-title a { text-decoration: none; color: inherit; }
+
+.g-nav { display: flex; gap: 20px; }
+.g-nav-link { color: var(--text-sub); text-decoration: none; font-size: 14px; font-weight: bold; }
+.g-nav-link:hover { color: var(--accent-color); }
+
+.add-btn {
+    background: var(--accent-color);
+    color: #0d1117;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* 外側の親コンテナ：横並びにする設定 */
+.summary-section {
+    display: flex;
+    justify-content: center; /* 中央に寄せる */
+    gap: 20px;               /* カード同士の隙間 */
+    padding: 30px 20px;
+    background: transparent;  /* 背景は透明にしてバナーを見せる */
+}
+
+/* ★個別の枠（カード）の設定 */
+.summary-card {
+    border: 1px solid var(--accent-color) !important; /* 強制適用 */
+    background-color: rgba(13, 17, 23, 0.7) !important;
+    display: flex !important;
+}
+
+/* 数字部分 */
+.summary-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* ラベル部分 (MONTHLYなど) */
+.summary-label {
+    font-size: 0.8rem;
+    color: var(--accent-color);
+    letter-spacing: 1px;
+}
+
+/* 「.summary-section の中にある .summary-card」と書くことで優先度が上がります */
+.summary-section .summary-card {
+    flex: 1;
+    max-width: 280px;
+    padding: 20px;
+    background-color: rgba(13, 17, 23, 0.7);
+    border: 1px solid var(--accent-color);
+    border-radius: 8px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
