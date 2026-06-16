@@ -1,0 +1,664 @@
+/* --- 共通変数設定 --- */
+:root {
+    --bg-color: #0d1117;     /* ページ全体の基本背景色（ダークモード） */
+    --accent-color: #00d4ff; /* ブランドカラーや強調表示に使用するシアン色 */
+    --border-color: #30363d; /* 区切り線や枠線の標準的な色 */
+    --text-main: #c9d1d9;    /* 標準的なテキスト（読みやすさを重視した明るいグレー） */
+    --text-sub: #8b949e;     /* 補足説明用の控えめなテキスト色 */
+    --danger-color: #ff4d4d; /* 削除やエラーなど注意を引くための赤色 */
+}
+
+/* 基本レイアウト：ドキュメント全体の基盤設定 */
+body {
+    background-color: var(--bg-color); /* 変数から背景色を適用 */
+    color: var(--text-main);           /* 変数からメインの文字色を適用 */
+    font-family: sans-serif;           /* 標準的なゴシック体系フォント */
+    margin: 0;                         /* ブラウザ標準の余白をリセット */
+}
+
+/* コンテンツ幅の制限と中央寄せ */
+.wrapper {
+    max-width: 1000px; /* 最大幅を1000pxに制限 */
+    margin: 40px auto; /* 上下に余白を作り、左右中央に配置 */
+    padding: 0 20px;   /* 画面端との衝突を防ぐ内側余白 */
+}
+
+/* --- ヘッダーエリア：ページ上部のタイトルとバッジ部分 --- */
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* centerから変更：これでタイトルが上に張り付きます */
+    border-bottom: 2px solid #00bcd4;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    min-height: 50px;
+}
+
+/* --- 1. 景品名の位置修正：専用スコープ --- */
+
+/* 親コンテナ：下線を基準にする */
+.item-detail-header-zone {
+    display: flex;
+    justify-content: space-between; /* 左右に振り分け */
+    align-items: flex-end;          /* バッジを下線に密着させる */
+    border-bottom: 2px solid #00d4ff; /* 水色の下線を端まで引く */
+    padding-bottom: 10px;           /* 下線と要素の隙間 */
+    margin: 40px 0 25px 0;
+    width: 100%;
+}
+
+/* 左側ブロック */
+.item-detail-header-zone .header-left {
+    display: flex;
+    flex-direction: column;         /* 名前と★を縦に並べる */
+    align-items: flex-start;        /* 左寄せ */
+    gap: 8px;                       /* 名前と★の上下間隔 */
+}
+
+/* 景品名：余計な余白を排除して位置を固定 */
+.item-detail-header-zone .detail-name {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    color: #fff;
+    line-height: 1.2;
+}
+
+/* 星ボタン（仮の調整） */
+.item-detail-header-zone .btn-favorite {
+    /*background: #fff;               /* 理想画像：白い背景 */
+    border: none;
+    color: #000;                    /* 理想画像：黒い★ */
+    font-size: 0.8rem;
+    padding: 2px 6px;               /* 小さな四角いボタン */
+    cursor: pointer;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 右側の獲得情報バッジも下揃え */
+.item-detail-header-zone .header-right {
+    /* バッジを右下に固定 */
+    display: flex;
+    align-items: flex-end;
+}
+
+/* バッジ共通 */
+.item-detail-header-zone .status-badge {
+    cursor: pointer;
+    padding: 2px 12px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    transition: 0.2s; /* 切り替え時のアニメーション */
+}
+
+/* 獲得済（水色枠・水色文字） */
+.item-detail-header-zone .badge-got {
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    background: transparent;
+}
+
+/* 未獲得（グレー枠・グレー文字） */
+.item-detail-header-zone .badge-un {
+    border: 1px solid #555;
+    color: #8b949e;
+    background: transparent;
+}
+
+/* お気に入りボタン：枠を消して星を際立たせる */
+.btn-favorite {
+    background: transparent !important; /* 背景を強制的に透明に */
+    border: none !important;           /* 枠線を強制的に消す */
+    outline: none !important;          /* クリック時の枠も消す */
+    box-shadow: none !important;       /* 影も一度リセット */
+    
+    font-size: 32px;                   /* 星の大きさ */
+    cursor: pointer;
+    padding: 5px 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    
+    /* お気に入り解除時：白く光る星 */
+    color: #ffffff !important; 
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
+}
+
+/* ホバーした時の反応 */
+.btn-favorite:hover {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+}
+
+/* お気に入り登録時（activeクラス）：ゴールドに輝く星 */
+.btn-favorite.active {
+    color: #ffca28 !important; /* ゴールド */
+    filter: drop-shadow(0 0 10px rgba(255, 202, 40, 0.7)); /* 宇宙的な輝き */
+}
+
+/* クリックした時のアニメーション（JSでactiveが切り替わった時に発動） */
+.btn-favorite:active {
+    transform: scale(0.9);
+}
+
+/* クリックした瞬間に「パッ」と弾けるアニメーション */
+@keyframes star-pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1.2); }
+}
+
+
+/* タイトルと★を囲むクラス名がHTMLとCSSでズレているのを修正 */
+/* HTML側が <div class="detail-left"> なので CSSも合わせる */
+.detail-left {
+    display: flex;
+    align-items: flex-start; /* centerから変更 */
+    gap: 15px;
+    padding-top: 2px;        /* タイトルとの微調整用（必要なら） */
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    overflow: hidden;              /* タイトルが長い時に右を突き破らないようにする */
+}
+
+/* 左側：タイトルと★ボタンの並び */
+.title-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 景品名の表示スタイル */
+.detail-name {
+    margin: 0;               /* ブラウザ標準の上下余白を削除 */
+    padding: 0;
+    font-size: 1.4rem;
+    color: #fff;
+    line-height: 1.2;        /* 行の高さを詰めるとより上に上がります */
+}
+
+.header-right {
+    margin-left: auto;             /* 強制的に右端へ */
+    padding-left: 20px;
+}
+
+/* 右側：ステータスバッジの共通スタイル */
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer; /* クリックできることを示す */
+    transition: background-color 0.3s;
+}
+
+.status-badge:hover {
+    opacity: 0.8;
+}
+
+
+/* 獲得済（青系） */
+.badge-got {
+    background-color: #00daff;
+    color: #000;
+    border: 1px solid #00daff;
+}
+
+/* 予約中 */
+.badge-res {
+    background-color: #ff9800;
+    color: #fff;
+}
+
+/* 未獲得 */
+.badge-un  {
+    background-color: #555;
+    color: #ccc;
+}
+
+/* 獲得ステータスを示すラベルバッジ */
+.badge-got {
+    border: 1px solid var(--accent-color); /* 枠線で囲む */
+    color: var(--accent-color);            /* 文字色もアクセント色にする */
+    padding: 3px 10px;                     /* バッジ内の余白 */
+    border-radius: 4px;                    /* 角を少し丸める */
+    font-size: 12px;                       /* 文字サイズは控えめにする */
+    font-weight: bold;                     /* 文字を太くして視認性を高める */
+}
+
+/* --- メインレイアウト：画像とスペックの2カラム配置 --- */
+.detail-main-layout {
+    display: flex; /* または grid */
+    justify-content: center; /* 中央に寄せる */
+    gap: 40px; /* 画像とスペック表の間隔 */
+    max-width: 1200px;
+    margin: 0 auto; /* 全体を中央に */
+}
+
+.gallery-container {
+    flex: 1;
+    max-width: 600px; /* 画像が大きくなりすぎないように制限 */
+}
+
+/* --- 画像ギャラリー機能：クリック（チェック）で画像を切り替える仕組み --- */
+/* タブ制御用のラジオボタンを画面から隠す */
+input[name="gallery"] {
+    display: none;
+}
+
+/* --- メイン画像の表示制御 --- */
+.main-img {
+    display: none; /* 初期状態はすべて非表示 */
+    width: 100%;
+    height: 100%;
+}
+
+.main-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: static; /* absoluteを解除 */
+    opacity: 1;      /* opacity制御からdisplay制御へ切り替え */
+}
+
+/* 親要素のサイズを制限する */
+.main-img-box {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    position: relative; /* 子要素を重ねる基準 */
+    overflow: hidden;
+    background: #161b22;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+/* 全てのメイン画像を重ねて配置し、初期状態は非表示にする */
+.main-img-box img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* ★重要：画像全体を収める設定 */
+    /*opacity: 0;          /* 最初は見えないように */
+    transition: opacity 0.3s; /* ふわっと切り替え */
+}
+
+/* サムネイル画像（下の小窓）の設定 */
+.sub-img-list .thumb img {
+    width: 100%;
+    height: 100%;
+    /* containにすることで、画像を切らずに枠内に収めます */
+    object-fit: contain; 
+    /* 背景色を設定しておくと、画像比率が違っても隙間が目立ちません */
+    background-color: #161b22; 
+}
+
+
+/* 対応するラジオボタンがチェックされた画像だけを表示する */
+#img0:checked ~ .main-img-box .main-i0,
+#img1:checked ~ .main-img-box .main-i1,
+#img2:checked ~ .main-img-box .main-i2,
+#img3:checked ~ .main-img-box .main-i3,
+#img4:checked ~ .main-img-box .main-i4 {
+    /*opacity: 1;              /* 不透明にする */
+    /*z-index: 1;              /* 前面に持ってくる */
+    display: block;
+}
+
+/* サムネイル（下の4枚）の横並びコンテナ */
+.sub-img-list {
+    display: flex;           /* 横並びにする */
+    gap: 10px;               /* サムネイル間の隙間 */
+    margin-top: 15px;        /* メイン画像との距離 */
+}
+
+/* 個々のサムネイル（ラベル要素） */
+.thumb {
+    flex: 1;                 /* すべて均等な幅にする */
+    aspect-ratio: 1/1;       /* サムネイルも正方形に */
+    border: 1px solid var(--border-color); /* 初期状態の枠線 */
+    opacity: 0.4;            /* 選択されていない時は暗くする */
+    cursor: pointer;         /* マウスオーバーで指先カーソルにする */
+    border-radius: 4px;      /* 角を丸める */
+    overflow: hidden;        /* はみ出た画像を隠す */
+    transition: 0.2s;        /* ホバーや選択時の変化を滑らかにする */
+}
+
+/* --- 2. 画像が「入っていない」時だけサンプル背景を出す --- */
+/* imgのsrcが空、もしくは未設定の場合のみ背景画像を表示 */
+.thumb:not(:has(img[src*="http"])) {
+    background-image: url('../img/gallery_sample1.png');
+}
+
+/* --- 2. 画像が「入っていない」時だけサンプル背景を出す --- */
+.thumb:not(:has(img)) {
+    /* 1枚の画像をすべての空枠で使用 */
+    background-image: url('../img/gallery_sample1.png'); 
+    background-size: cover;      /* 枠いっぱいに広げる */
+    background-position: center; /* 中央に合わせる */
+    background-repeat: no-repeat;
+    background-color: #161b22;   /* 読み込みまでの下地色 */
+}
+
+/* --- 3. 個別の位置指定は不要になったので削除 --- */
+/* もし「1枚の大きな画像を4分割して使っていた」時の設定が残っていたら、
+   background-position: 0% 0%; などの記述はすべて削除するかコメントアウトしてください。
+   そうしないと、アームの画像がズレて表示されてしまいます。
+*/
+
+
+/* --- 3. 各枠ごとに表示位置（切り抜き位置）を指定 --- */
+/* 1枚目（アーム） */
+.thumb1:not(:has(img[src*="http"])) {
+    background-image: url('../img/gallery_sample1.png'); /* バラバラにしたファイル名 */
+}
+/* 2枚目：右上の箱 */
+.thumb2:not(:has(img[src*="http"])) {
+    background-image: url('../img/gallery_sample1.png'); /* バラバラにしたファイル名 */
+}
+
+/* 3枚目：左下の筐体 */
+.thumb3:not(:has(img[src*="http"])) {
+    background-image: url('../img/gallery_sample1.png'); /* バラバラにしたファイル名 */
+}
+
+/* 4枚目：右下のプラス */
+.thumb4:not(:has(img[src*="http"])) {
+    background-image: url('../img/gallery_sample1.png'); /* バラバラにしたファイル名 */
+}
+
+/* --- 4. 既存画像自体のスタイル --- */
+.thumb img {
+    /*width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* pointer-eventsを無効にすることで、クリックをラベル（背後）へ透過させます */
+    pointer-events: none;
+}
+
+
+/* 現在選択されているメイン画像に対応するサムネイルを強調 */
+#img0:checked ~ .sub-img-list .thumb0,
+#img1:checked ~ .sub-img-list .thumb1,
+#img2:checked ~ .sub-img-list .thumb2,
+#img3:checked ~ .sub-img-list .thumb3,
+#img4:checked ~ .sub-img-list .thumb4 {
+    
+    border: 2px solid var(--accent-color); /* 枠を太く */
+    opacity: 1;
+    background-color: rgba(0, 212, 255, 0.1); /* 選択中にうっすら色付け */
+    display: block;
+}
+
+/* --- スペック情報エリア：景品の詳細データを並べる部分 --- */
+.specs-and-actions {
+    display: flex;           /* 縦に並べるためのFlexbox設定 */
+    flex-direction: column;  /* 子要素を上から下へ配置 */
+    gap: 25px;               /* 各情報ブロック間の垂直距離 */
+}
+
+.specs-container {
+    width: 100%; /* コンテナいっぱいに広げる */
+}
+
+/* 各情報の1行分（シリーズ名や重心など） */
+.spec-item {
+    display: flex;                   /* 項目名と編集ボタンを横並びに */
+    justify-content: space-between;  /* 両端に配置 */
+    align-items: flex-end;           /* 下端を揃える */
+    padding: 10px 0;                 /* 上下の余白 */
+    border-bottom: 1px solid var(--border-color); /* 行間の区切り線 */
+}
+
+/* テキスト情報のコンテナ */
+.spec-info {
+    flex: 1; /* 残りの幅をすべて占有する */
+}
+
+/* 項目の見出しラベル（「メーカー」など） */
+.spec-item label {
+    display: block;          /* 改行して値を下に配置するためブロック化 */
+    font-size: 11px;         /* 文字サイズを小さくする */
+    color: var(--text-sub);  /* 控えめな色にする */
+    margin-bottom: 4px;      /* 値との間の距離 */
+}
+
+/* 項目の具体的な値 */
+.spec-value {
+    font-size: 16px;         /* 読みやすいサイズ */
+    color: #fff;             /* 明るい色で表示 */
+}
+
+/* 重心予測など、特に強調したいステータスの設定 */
+.spec-value.highlight {
+    color: var(--accent-color); /* アクセント色で強調 */
+    font-weight: bold;          /* 太字にする */
+    display: flex;              /* アイコン等と並べる場合の準備 */
+    align-items: baseline;      /* 文字の底辺を揃える */
+}
+
+/* 項目右側の小さな編集用ペンボタン */
+.row-edit-btn {
+    background: none;        /* 背景なし */
+    border: none;            /* 枠線なし */
+    color: var(--text-sub);  /* 初期状態は控えめな色 */
+    opacity: 0.4;            /* 半透明にする */
+    cursor: pointer;         /* クリック可能を明示 */
+    font-size: 14px;         /* アイコンの大きさ */
+    padding: 5px;            /* クリックしやすいよう余白を設定 */
+    transition: 0.2s;        /* ホバー時の変化を滑らかに */
+}
+
+/* 編集ボタンのホバー（マウス乗せ）時 */
+.row-edit-btn:hover {
+    color: var(--accent-color); /* アクセント色に光る */
+    opacity: 1;                 /* はっきり見えるようにする */
+}
+
+/* --- 重心確認モーダル & クロスヘア：重心を視覚化するオーバーレイ --- */
+/* 「画像で確認」のリンク風テキスト */
+.evidence-link-text {
+    font-size: 11px;           /* 小さめの文字 */
+    color: var(--accent-color);/* アクセント色 */
+    cursor: pointer;           /* クリック可能を明示 */
+    text-decoration: underline;/* 下線を引く */
+    margin-left: 8px;          /* 前の要素との距離 */
+    font-weight: normal;       /* 太字解除 */
+}
+
+
+/* 重心を示すクロスヘア（十字の照準マーク） */
+.crosshair {
+    position: absolute;      /* 画像の上で自由に動かせるよう絶対配置 */
+    width: 60px;             /* 十字線の横幅 */
+    height: 60px;            /* 十字線の縦幅 */
+    transform: translate(-50%, -50%); /* 座標の指定を「中心点」にする */
+    pointer-events: none;    /* この要素がクリックを邪魔しないようにする */
+}
+
+/* 照準の線（縦・横共通設定） */
+.ch-line-v, .ch-line-h {
+    position: absolute;               /* 各線を照準の中心に配置 */
+    background-color: #ff0000;        /* 目立つ赤色 */
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.8); /* 線を光らせて見やすくする */
+}
+
+/* 垂直線（縦） */
+.ch-line-v {
+    top: 0; left: 50%;                /* 横方向中央に配置 */
+    width: 2px; height: 100%;         /* 細長く、縦いっぱいに */
+}
+
+/* 水平線（横） */
+.ch-line-h {
+    top: 50%; left: 0;                /* 縦方向中央に配置 */
+    width: 100%; height: 2px;         /* 横いっぱいに、細く */
+}
+
+/* 重心位置に添えるラベル（HEAVY） */
+.ch-label {
+    position: absolute;               /* 十字線の上に配置 */
+    top: -22px;                       /* 十字線より少し上に置く */
+    left: 50%;                        /* 左右中央 */
+    transform: translateX(-50%);      /* ラベルの中心を合わせる */
+    color: #ff0000;                   /* 赤色 */
+    font-size: 12px;                  /* ラベル文字の大きさ */
+    font-weight: bold;                /* 太字 */
+    text-shadow: 1px 1px 2px #000;    /* 文字が画像に紛れないよう影を付ける */
+    white-space: nowrap;              /* 改行させない */
+}
+
+
+
+/* メインの「編集する」ボタン */
+.btn-edit-main {
+    background: var(--accent-color);  /* アクセント色で一番目立たせる */
+    border: none;                     /* 枠線なし */
+    color: #0d1117;                   /* 文字は背景色と同じ暗い色で視認性を確保 */
+    padding: 10px 30px;               /* ボタンの内側余白（幅広にする） */
+    border-radius: 4px;               /* 角を丸める */
+    font-weight: bold;                /* 太字 */
+    cursor: pointer;                  /* クリック可能を明示 */
+    transition: 0.2s;                 /* ホバー時の変化を滑らかに */
+}
+
+/* 編集ボタンホバー時 */
+.btn-edit-main:hover {
+    opacity: 0.8;                     /* 少し半透明にして反応を示す */
+}
+
+/* 「削除」ボタン */
+.btn-delete-main {
+    background: none;                 /* 背景なし（枠線のみのデザイン） */
+    border: 1px solid var(--danger-color); /* 削除を示す赤い枠線 */
+    color: var(--danger-color);       /* 赤い文字色 */
+    padding: 10px 20px;               /* ボタンの内側余白 */
+    border-radius: 4px;               /* 角を丸める */
+    cursor: pointer;                  /* クリック可能を明示 */
+    transition: 0.2s;                 /* ホバー時の変化を滑らかに */
+}
+
+/* 削除ボタンホバー時 */
+.btn-delete-main:hover {
+    background: rgba(255, 77, 77, 0.1); /* 背景をうっすら赤く光らせる */
+}
+
+/* --- 関連景品セクション：ページ下部のサムネイルリスト --- */
+.related-prizes {
+    margin-top: 30px;                 /* メインコンテンツとの間の広い余白 */
+    padding-top: 20px;                /* 区切り線との間の余白 */
+    border-top: 1px solid var(--border-color); /* 上の区切り線 */
+}
+
+/* セクションタイトル（RELATED PRIZES） */
+.section-title {
+    font-size: 1.2em;           /* 小さめでスタイリッシュに */
+    font-weight: bold;
+    color: var(--accent-color); /* アクセント色 */
+    margin-bottom: 15px;        /* リストとの間の余白 */
+}
+
+/* 関連アイテムを並べるコンテナ */
+.related-list {
+    display: flex;           /* サムネイルを横に並べる */
+    gap: 12px;               /* サムネイル同士の隙間 */
+    width: 100%;             /* 親要素の幅いっぱいに広げる */
+}
+
+/* 既存のリンク要素を均等に広げる */
+.related-item-link {
+    flex: 1;                 /* 4つのリンクを均等な幅にする */
+    min-width: 0;            /* flexアイテムのはみ出し防止 */
+    text-decoration: none;   /* 下線を消す */
+}
+
+/* 個々の関連アイテム（サムネイル枠） */
+.related-item {
+    flex: 0 0 100px;         /* 幅を100pxに固定して伸縮させない */
+    aspect-ratio: 1/1;       /* 正方形を維持 */
+    border: 1px solid var(--border-color); /* 枠線 */
+    border-radius: 4px;      /* 角を丸める */
+    overflow: hidden;        /* 画像のはみ出しをカット */
+    opacity: 0.6;            /* 少し薄く表示して目立たせない */
+    transition: 0.3s;        /* ホバー時の変化効果 */
+}
+
+/* 関連アイテムホバー時 */
+.related-item:hover {
+    opacity: 1;              /* はっきり表示する */
+    border-color: var(--accent-color); /* 枠をアクセント色にする */
+}
+
+/* サムネイル画像自体の設定 */
+.related-item img {
+    width: 100%;             /* 枠いっぱいに広げる */
+    height: 100%;            /* 枠いっぱいに広げる */
+    object-fit: cover;       /* 比率を維持しつつ埋める */
+}
+
+/* --- フッター：画面最下部のナビゲーション --- */
+.action-footer {
+    margin-top: 40px;                 /* 関連景品エリアとの距離 */
+    padding-top: 20px;                /* 区切り線との間の余白 */
+    border-top: 1px solid var(--border-color); /* 上の区切り線 */
+}
+
+/* 「一覧に戻る」ボタン */
+.btn-back {
+    background: none;                 /* シンプルなボタン */
+    border: 1px solid var(--text-sub); /* 控えめな色の枠線 */
+    color: var(--text-sub);           /* 文字色も控えめに */
+    padding: 8px 20px;                /* 内側余白 */
+    border-radius: 4px;               /* 角を丸める */
+    cursor: pointer;                  /* クリック可能を明示 */
+    font-size: 13px;                  /* 文字サイズ */
+}
+
+/* 2枚以下の時だけ適用されるデザイン（ wide-layout クラスがある場合 ） */
+.related-list.wide-layout .related-item-link {
+    flex: 0 0 200px; /* 100pxではなく200pxにする、などの調整が可能 */
+}
+
+.not_related-list {
+    color var(--text-sub);
+    font-size: 0.9em;
+}
+
+/* ****************** */
+/*                    */
+/*     景品説明        */
+/*                    */
+/* ****************** */
+/* 景品説明エリアのスタイル */
+.prize-memo-container {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.memo-title {
+    margin-top: 0;
+    font-size: 1.1em;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.memo-content {
+    line-height: 1.6;
+    /* 改行を維持するための設定 */
+    
+    word-wrap: break-word;
+}

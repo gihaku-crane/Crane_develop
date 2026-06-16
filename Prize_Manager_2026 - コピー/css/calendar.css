@@ -1,0 +1,232 @@
+/* =========================================
+   CALENDAR COMPONENT STYLES
+   動的生成されるカレンダー専用のスタイル
+   ========================================= */
+
+/* カレンダーの外枠（サイドバー内のカード） */
+.calendar-container {
+    background: rgba(13, 17, 23, 0.8); /* 背景：少し透明なダークグレー */
+    border: 1px solid var(--accent-color); /* 枠線：メインのアクセントカラー（水色） */
+    border-radius: 8px; /* 角丸 */
+    padding: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* 浮き上がって見えるように影をつける */
+    width: 100%;/* 親要素(サイドバー)の横幅をいっぱいに広げる */
+    box-sizing: border-box;
+}
+
+/* カレンダー上部の「202X年 X月」の部分 */
+.calendar-header {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* 年月を表示するタイトルのテキスト */
+.calendar-title {
+    color: var(--accent-color); /* 文字色：水色 */
+    font-size: 1.1rem;
+    margin: 0;
+    letter-spacing: 1px; /* 少し文字間隔を広げてスタイリッシュに */
+}
+
+/* カレンダー本体のテーブル */
+.calendar-table {
+    width: 100%;
+    border-collapse: collapse; /* 枠線を重ねて1本にする */
+    font-size: 13px;
+}
+
+/* 曜日ヘッダー（月〜日） */
+.calendar-table th {
+    padding: 8px 0;
+    color: var(--text-sub); /* 少し暗めの文字色 */
+    font-weight: normal;
+    border-bottom: 1px solid #30363d; /* 曜日の下に仕切り線 */
+}
+
+/* 日付が入る各セル（マス目） */
+.calendar-table td {
+    width: 14.28%; /* 7列均等（100 / 7） */
+    height: 45px;
+    text-align: center;
+    vertical-align: middle;
+    position: relative; /* 子要素（★マークなど）の基準位置にするため */
+    border: 1px solid #21262d; /* 薄いグレーの枠線 */
+    transition: all 0.2s ease; /* ホバー時のアニメーション速度 */
+}
+
+/* 日付の数字そのもの */
+.day-num {
+    display: block;
+    color: var(--text-main); /* 文字色：白 */
+}
+
+/* 月の始まり前、終わり後の空白セル */
+.empty {
+    background: rgba(0, 0, 0, 0.2); /* 他より暗くして目立たなくする */
+}
+
+/* 土曜日の日付セル */
+.sat-cell .day-num { 
+    color: #58a6ff; /* 青色 */
+}
+
+/* 日曜日および祝日の日付セル */
+.holiday-cell .day-num { 
+    color: #f85149; /* 赤色 */
+}
+
+/* 「今日」の日付セルのハイライト */
+.today-cell {
+    background: rgba(0, 212, 255, 0.1); /* 背景を薄く青くする */
+    outline: 1px inset var(--accent-color); /* 内側にアクセントカラーの枠 */
+}
+
+/* 何らかの景品が入荷する日のセル */
+.prize-cell {
+    background: rgba(0, 212, 255, 0.05); /* ほんの少し青みを付ける */
+}
+
+/* 景品がある日の日付リンク（Aタグ） */
+.prize-cell a {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* 景品がある日のマウスホバー時 */
+.prize-cell:hover {
+    background: rgba(0, 212, 255, 0.2); /* ホバーで少し明るく */
+}
+
+/* お気に入り登録がある日の右上の「★」マーク */
+.star-mark {
+    color: #f1e05a; /* 黄色 */
+    font-size: 10px;
+    position: absolute; /* セルの中での絶対配置 */
+    top: 2px;
+    right: 4px;
+    text-shadow: 0 0 5px rgba(241, 224, 90, 0.8); /* ぼんやり光らせる */
+}
+
+/* リンク付きの日付をホバーした際、文字自体を光らせる */
+.calendar-table td a:hover .day-num {
+    color: var(--accent-color);
+    text-shadow: 0 0 8px var(--accent-color);
+}
+
+/* お気に入りがある日のセルの設定 */
+.calendar-table td.has-favorite {
+    position: relative; /* 星の位置基準にするため */
+    z-index: 1;
+}
+
+/* 背景に星を表示する */
+.calendar-table td.has-favorite::before {
+    content: "★";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem; /* セルの大きさに合わせて調整 */
+    color: rgba(255, 215, 0, 0.2); /* 金色を薄く透明にする (0.2 = 20%) */
+    z-index: -1; /* 数字（day-num）の後ろに配置 */
+    pointer-events: none; /* クリックを邪魔しない */
+}
+
+/* ホバー時に星を少し明るくする演出（任意） */
+.calendar-table td.has-favorite:hover::before {
+    color: rgba(255, 215, 0, 0.4);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* 数字を見やすくする */
+.calendar-table td.has-favorite .day-num {
+    font-weight: bold;
+    position: relative;
+    z-index: 2;
+}
+
+/* ナビゲーション用の追加・更新スタイル */
+.calendar-header-nav {
+    margin-bottom: 15px;
+}
+
+.nav-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.nav-arrow {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--text-sub);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* 前月: 赤ホバー */
+.prev-link:hover {
+    color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.1);
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+}
+
+/* 翌月: 青ホバー */
+.next-link:hover {
+    color: #00d4ff;
+    background: rgba(0, 212, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+.nav-sub {
+    text-align: center;
+}
+
+/* 今月ボタン: 緑ベース */
+.today-link {
+    font-size: 11px;
+    color: #51cf66;
+    text-decoration: none;
+    border: 1px solid #51cf66;
+    padding: 2px 12px;
+    border-radius: 12px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.today-link:hover {
+    background: #51cf66;
+    color: #0d1117;
+    box-shadow: 0 0 12px rgba(81, 207, 102, 0.5);
+}
+
+/* 今日の強調表示 */
+.is-today {
+    position: relative;
+    border: 1px solid #51cf66 !important;
+    background: rgba(81, 207, 102, 0.05) !important;
+}
+
+.is-today::after {
+    content: "TODAY";
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 7px;
+    color: #51cf66;
+    font-weight: bold;
+}

@@ -1,0 +1,269 @@
+
+/* 全体の外枠 */
+.app-container {
+    max-width: 1200px;    /* 最大横幅を制限 */
+    margin: 0 auto;       /* 左右中央寄せ */
+    padding: 20px 40px;   /* 左右にしっかり余白を確保 */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* パンくずリスト */
+.breadcrumb {
+    margin-bottom: 30px;
+    font-size: 14px;
+    color: var(--text-sub);
+    padding-left: 5px;   /* タイトルとの縦ラインを揃える */
+}
+
+.breadcrumb a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.breadcrumb span {
+    margin: 0 10px;
+    opacity: 0.5;
+}
+
+/* ヒーローセクション */
+.shop-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0) 100%);
+    border-left: 4px solid var(--accent-color);
+    padding: 30px;
+    border-radius: 4px 12px 12px 4px;
+    margin-bottom: 30px;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;           /* 左右のカードの間の余白を広げる */
+}
+
+.shop-name-title {
+    font-size: 2.5rem;
+    margin: 0 0 15px 0;
+    letter-spacing: -1px;
+}
+
+.feature-tag {
+    background: #1e293b;
+    border: 1px solid #334155;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-right: 8px;
+    color: #cbd5e1;
+}
+
+/* PrizeON ステータスパネル */
+.prizeon-status-panel {
+    min-width: 180px;
+    padding: 15px;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.prizeon-status-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 2px;
+    background: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-color);
+}
+
+.status-label {
+    font-size: 10px;
+    color: var(--text-sub);
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.status-value {
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+.status-active .status-value {
+    color: var(--accent-color);
+}
+
+.status-inactive .status-value {
+    color: #64748b;
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+}
+
+.status-active .status-indicator {
+    background: var(--accent-color);
+    box-shadow: 0 0 15px var(--accent-color);
+    animation: pulse 2s infinite;
+}
+
+/* グリッドレイアウト */
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 30px;
+}
+
+.info-card {
+    background: rgba(30, 41, 59, 0.4);
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.section-title {
+    font-size: 14px;
+    color: var(--accent-color);
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 8px;
+    letter-spacing: 2px;
+}
+
+.info-item {
+    margin-bottom: 20px;
+}
+
+.info-item .label {
+    display: block;
+    font-size: 10px;
+    color: var(--text-sub);
+    margin-bottom: 4px;
+}
+
+.info-item .value {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+/* マップエリア */
+.map-container {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.map-placeholder {
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: #020617;
+}
+
+.map-grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(rgba(0, 212, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.map-text {
+    color: #1e293b;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.map-link-btn {
+    display: block;
+    text-align: center;
+    padding: 15px;
+    background: #1e293b;
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.map-link-btn:hover {
+    background: #334155;
+}
+
+/* ソーシャルボタン */
+.social-links {
+    display: flex;
+    gap: 10px;
+}
+
+.social-btn {
+    flex: 1;
+    padding: 12px;
+    text-align: center;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid #334155;
+    color: var(--text-main);
+}
+
+.social-btn.tw { background: #000; }
+.social-btn.web { background: rgba(255,255,255,0.05); }
+
+/* 下部アクション */
+.action-footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #334155;
+}
+
+.back-btn {
+    color: var(--text-sub);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.back-btn:hover {
+    color: var(--accent-color);
+}
+
+.update-info {
+    text-align: right;
+    font-size: 12px;
+    color: var(--text-sub);
+    margin-top: 20px;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
+}
+
+@media (max-width: 768px) {
+    .shop-hero {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .app-container {
+        padding: 15px 20px;
+    }
+    .detail-grid {
+        grid-template-columns: 1fr; /* スマホでは縦並び */
+        gap: 20px;
+    }
+    
+    .shop-name-title {
+        font-size: 1.8rem;
+    }
+}
