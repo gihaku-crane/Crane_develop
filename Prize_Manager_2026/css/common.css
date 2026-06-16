@@ -110,3 +110,33 @@ header {
     flex-direction: column;
     gap: 5px;
 }
+
+/* デバッグボタンと追加ボタンの横並び設定 */
+.header-right-group {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* ここで余白を一括管理 */
+}
+
+/* デバッグボタンのスタイル */
+.debug-btn {
+    font-size: 10px;
+    padding: 4px 8px;
+    cursor: pointer;
+    background: #666;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    white-space: nowrap;
+    transition: background 0.3s;
+}
+
+/* DEBUG ON時の色 */
+.debug-btn.is-on {
+    background: #ff4444;
+}
+
+/* フォームのマージンリセット */
+.debug-form {
+    margin: 0;
+}

@@ -9,7 +9,13 @@ require_once __DIR__ . '/includes/config.php';
 require_once 'includes/db_connect.php';
 require_once 'includes/header.php';
 
+// 次にロジックを呼ぶ
+//require_once 'controllers/item_controller.php';
 
+// セッション対策もここで統一
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // シリーズ一覧を取得
 $series_list = $pdo->query("SELECT id, name FROM series ORDER BY name ASC")->fetchAll(PDO::FETCH_ASSOC);

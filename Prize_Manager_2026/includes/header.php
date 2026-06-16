@@ -6,6 +6,12 @@
  */
 
 function output_header($current_page) {
+    // セッションを開始（まだ開始されていない場合）
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    $is_debug_mode = $_SESSION['debug_mode'] ?? false;
+
     // --- 1. メニュー項目とファイル名の対応設定 ---
     // 左側のキーが $current_page と比較される名前、右側が実際のリンク先ファイル名です。
     $nav_items = [
@@ -28,6 +34,7 @@ function output_header($current_page) {
                 <!-- BASE_URL は env.php で定義されているサイトのルートURLです -->
                 <a href="<?php echo BASE_URL; ?>Top.php">Prize_Manager_2026</a>
             </h1>
+            
             <nav class="g-nav">
                 <!-- ナビゲーションメニューをforeachで表示 -->
                 <?php foreach ($nav_items as $key => $file): ?>
@@ -43,10 +50,17 @@ function output_header($current_page) {
                     </a>
                 <?php endforeach; ?>
             </nav>
+
+            <div class="header-right-group">
+                <form action="<?php echo BASE_URL; ?>toggle_debug.php" method="POST" class="debug-form">
+                    <button type="submit" class="debug-btn <?php echo $is_debug_mode ? 'is-on' : ''; ?>">
+                        DEBUG: <?php echo $is_debug_mode ? 'ON' : 'OFF'; ?>
+                    </button>
+                </form>
+
             <!-- 景品追加用のアクションボタン（リンク先は今後実装予定） -->
             <a href="add_prize.php" class="add-btn">+ ADD PRIZE</a>
         </div>
     </header>
     <?php
 }
-?>
