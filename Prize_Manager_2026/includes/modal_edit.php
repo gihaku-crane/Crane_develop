@@ -47,16 +47,7 @@
                     <label>入荷店舗</label>
                     <div id="shopTags" class="shop-tags-container">
                         <?php
-                        // 現在登録されている店舗情報を取得
-                        $stmt_current_shops = $pdo->prepare("
-                            SELECT s.id, s.name 
-                            FROM shops s
-                            JOIN prize_shops ps ON s.id = ps.shop_id
-                            WHERE ps.prize_id = ?
-                        ");
-                        $stmt_current_shops->execute([$id]);
-                        $current_shops = $stmt_current_shops->fetchAll(PDO::FETCH_ASSOC);
-
+                        
                         // 店舗情報が空の場合でも、このdivの中身が空になるだけで div自体は残るためJSのエラーを回避可能
                         if (isset($current_shops) && is_array($current_shops)):
                             foreach ($current_shops as $shop): ?>

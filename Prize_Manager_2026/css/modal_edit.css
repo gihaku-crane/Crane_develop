@@ -174,3 +174,9 @@
     position: relative;
     z-index: 9999;
 }
+
+/* モーダル内のカレンダーアイコンを明るくする */
+.modal-content input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); /* 背景が暗いので白っぽく反転 */
+    cursor: pointer;
+}
