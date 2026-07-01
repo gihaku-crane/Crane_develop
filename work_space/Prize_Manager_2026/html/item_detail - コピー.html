@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>景品詳細 | Prize_Manager_2026</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/Item_detail.css">
+</head>
+<body class="bg-common">
+    <header>
+        <div class="header-banner"></div>
+        <div class="header-content">
+            <h1 class="header-title"><a href="Top.html">Prize_Manager_2026</a></h1>
+            <nav class="g-nav">
+                <a href="Top.html" class="g-nav-link">HOME</a>
+                <a href="list.html" class="g-nav-link">LIST</a>
+                <a href="shop.html" class="g-nav-link">SHOP</a>
+                <a href="menu.html" class="g-nav-link">MENU</a>
+            </nav>
+            <a href="#" class="add-btn">+ ADD</a>
+        </div>
+    </header>
+
+    <div class="wrapper detail-wrapper">
+        <section class="detail-header">
+            <div class="title-area">
+                <h1 class="detail-name">リムル＝テンペスト Relax time</h1>
+                <button class="btn-favorite active">★</button>
+            </div>
+            <div class="status-badge-area">
+                <span class="badge-got">獲得済み</span>
+            </div>
+        </section>
+
+        <div class="detail-main-layout">
+            <div class="gallery-container">
+                <input type="radio" name="gallery" id="img1" checked>
+                <input type="radio" name="gallery" id="img2">
+                <input type="radio" name="gallery" id="img3">
+                <input type="radio" name="gallery" id="img4">
+                <div class="main-img-box">
+                    <img src="https://images.unsplash.com/photo-1559535332-db9971090158?w=600" class="main-i1">
+                    <img src="https://images.unsplash.com/photo-1608889175123-8ee362201f81?w=600" class="main-i2">
+                    <img src="https://images.unsplash.com/photo-1618336753974-aae8e04506aa?w=600" class="main-i3">
+                    <img src="https://images.unsplash.com/photo-1560439514-4e9645039924?w=600" class="main-i4">
+                </div>
+                <div class="sub-img-list">
+                    <label for="img1" class="thumb thumb1"><img src="https://images.unsplash.com/photo-1559535332-db9971090158?w=150"></label>
+                    <label for="img2" class="thumb thumb2"><img src="https://images.unsplash.com/photo-1608889175123-8ee362201f81?w=150"></label>
+                    <label for="img3" class="thumb thumb3"><img src="https://images.unsplash.com/photo-1618336753974-aae8e04506aa?w=150"></label>
+                    <label for="img4" class="thumb thumb4"><img src="https://images.unsplash.com/photo-1560439514-4e9645039924?w=150"></label>
+                </div>
+            </div>
+
+            <div class="specs-and-actions">
+                <div class="specs-container">
+                    <div class="spec-item">
+                        <div class="spec-info"><label>シリーズ</label><div class="spec-value">Relax time</div></div>
+                        <button class="row-edit-btn" title="編集">✎</button>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-info"><label>種類 / サイズ</label><div class="spec-value">全1種 / 約20cm</div></div>
+                        <button class="row-edit-btn">✎</button>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-info"><label>作品タイトル名</label><div class="spec-value">転生したらスライムだった件</div></div>
+                        <button class="row-edit-btn">✎</button>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-info">
+                            <label>重心予測</label>
+                            <div class="spec-value highlight">
+                                <span class="gravity-text">【裏 / 右 / 下】重心</span>
+                                <label for="modal-toggle" class="evidence-link-text">（※画像で確認）</label>
+                            </div>
+                        </div>
+                        <button class="row-edit-btn">✎</button>
+                        <input type="checkbox" id="modal-toggle" class="modal-checker">
+                        <div class="modal-overlay">
+                            <label for="modal-toggle" class="modal-close-bg"></label>
+                            <div class="modal-content">
+                                <img src="https://images.unsplash.com/photo-1608889175123-8ee362201f81?w=800">
+                                <label for="modal-toggle" class="btn-close">×</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-info"><label>入荷予定日</label><div class="spec-value">2026/04/15(水)</div></div>
+                        <button class="row-edit-btn">✎</button>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-info"><label>主な入荷店舗</label><div class="spec-value">ナムコ ラゾーナ川崎店</div></div>
+                        <button class="row-edit-btn">✎</button>
+                    </div>
+                </div>
+
+                <div class="main-action-area">
+                    <button class="btn-edit-main">編集する</button>
+                    <button class="btn-delete-main">削除</button>
+                </div>
+            </div>
+        </div>
+
+        <section class="related-prizes">
+            <h3 class="section-title">RELATED PRIZES <span>関連景品</span></h3>
+            <div class="related-list">
+                <div class="related-item"><img src="https://images.unsplash.com/photo-1580234797602-22c37b2a6230?w=150"></div>
+                <div class="related-item"><img src="https://images.unsplash.com/photo-1620626011761-9963d7521476?w=150"></div>
+                <div class="related-item"><img src="https://images.unsplash.com/photo-1612689690865-2035b60c449b?w=150"></div>
+                <div class="related-item"><img src="https://images.unsplash.com/photo-1560439514-4e9645039924?w=150"></div>
+            </div>
+        </section>
+
+        <div class="action-footer">
+            <button class="btn-back" onclick="location.href='list.html'">一覧に戻る</button>
+        </div>
+    </div>
+</body>
+</html>

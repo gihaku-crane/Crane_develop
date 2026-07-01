@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link rel="icon" href="img/favicon.png" type="image/png" sizes="32x32"><!-- ブラウザタブアイコン -->
+        <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+        <link rel="stylesheet" href="css/common.css"> <!-- CSSを使用可能に -->
+        <link rel="stylesheet" href="css/top.css"> <!-- CSSを使用可能に -->
+
+    	<title>Prize_Manager_2026</title>
+    </head>
+    <body>
+        <!-- ヘッダー部 -->
+    <header>
+        <div class="header-banner"></div>
+
+        <div class="header-content">
+            <h1 class="header-title">
+                <a href="Top.html">Prize_Manager_2026</a>
+            </h1>
+            
+            <nav class="g-nav">
+                <a href="Top.html" class="g-nav-link active">HOME</a>
+                <a href="list.html" class="g-nav-link">LIST</a>
+                <a href="shop.html" class="g-nav-link">SHOP</a>
+                <a href="menu.html" class="g-nav-link">MENU</a>
+            </nav>
+
+            <a href="#" class="add-btn">+ ADD</a>
+        </div>
+    </header>
+    
+        <!-- サマリーセクション -->
+        <div class="app-container">
+            <div class="summary-section">
+                <!-- その月の 獲得総数
+                    役割: 「今月はいくつゲットできたか」を表示します。棚に並んだフィギュアを見るような、達成感を味わうための数字です。 -->
+                <div class="summary-card">
+                    <span class="summary-value">05</span>
+                    <span class="summary-label">MONTHLY</span>
+                </div>
+                <!-- その月の コスト総額（かかった金額）
+                    役割: 「今月はいくら使ったか」を表示します。財布の紐を引き締めるための、最も現実的な（そして時には見たくない）数字です。 -->
+                <div class="summary-card">
+                    <span class="summary-value">¥12,000</span>
+                    <span class="summary-label">COST</span>
+                </div>
+                <!-- その月の 狙い総数（発売される景品数）
+                役割: 「今月はいくつターゲットがあるか」を表示します。予算（COST）やスケジュール（カレンダー）を立てるための、作戦会議の指標になる数字です。 -->
+                <div class="summary-card">
+                    <span class="summary-value">03</span>
+                    <span class="summary-label">TARGETS</span>
+                </div>
+            </div>
+        
+        	<div class="main-layout">
+
+                <div class="main-content">
+                    <!-- TODAY'S ARRIVAL セクション -->
+                    <section class="arrival-section">
+                        <h2 class="section-title">TODAY'S ARRIVAL</h2>
+                        <div class="arrival-grid">
+                            <div class="item-card">
+                                <a href="item_detail.html">
+                                    <div class="item-img-placeholder">IMAGE</div>
+                                </a>
+                                <div class="item-info">
+                                    <span class="item-name">
+                                        <a href="item_detail.html">作品名：ここに作品名を記載予定</a>
+                                    </span>
+                                    <span class="item-status">
+                                        <a href="prize_not_received.html">獲得：未</a>
+                                    </span>
+                                    <span class="item-location">
+                                        <a href="shop_location.html">Location：ここに店舗名（蒲田/川崎など）を記載予定</a>
+                                    </span>
+                                </div>
+                                <span class="hot-badge">HOT</span>
+                            </div>
+
+                            <div class="item-card">
+                                <a href="item_detail.html">
+                                    <div class="item-img-placeholder">IMAGE</div>
+                                </a>
+                                <div class="item-info">
+                                    <span class="item-name">
+                                        <a href="item_detail.html">作品名：ここに作品名を記載予定</a>
+                                    </span>
+                                    <span class="item-status">
+                                        <a href="prize_not_received.html">獲得：未</a>
+                                    </span>
+                                    <span class="item-location">
+                                        <a href="shop_location.html">Location：ここに店舗名（蒲田/川崎など）を記載予定</a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <a href="item_detail.html">
+                                    <div class="item-img-placeholder">IMAGE</div>
+                                </a>
+                                <div class="item-info">
+                                    <span class="item-name">
+                                        <a href="item_detail.html">サンプル景品 03</a>
+                                    </span>
+                                    <span class="item-status">
+                                        <a href="prize_not_received.html">獲得：未</a>
+                                    </span>
+                                    <span class="item-location">
+                                        <a href="shop_location.html">Location：店舗名テスト</a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <a href="item_detail.html">
+                                    <div class="item-img-placeholder">IMAGE</div>
+                                </a>
+                                <div class="item-info">
+                                    <span class="item-name">
+                                        <a href="item_detail.html">サンプル景品 04</a>
+                                    </span>
+                                    <span class="item-status">
+                                        <a href="prize_not_received.html">獲得：未</a>
+                                    </span>
+                                    <span class="item-location">
+                                        <a href="shop_location.html">Location：店舗名テスト</a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <a href="item_detail.html">
+                                    <div class="item-img-placeholder">IMAGE</div>
+                                </a>
+                                <div class="item-info">
+                                    <span class="item-name">
+                                        <a href="item_detail.html">サンプル景品 05</a>
+                                    </span>
+                                    <span class="item-status">
+                                        <a href="prize_not_received.html">獲得：未</a>
+                                    </span>
+                                    <span class="item-location">
+                                        <a href="shop_location.html">Location：店舗名テスト</a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <a href="item_detail.html">
+                                    <div class="item-img-placeholder">IMAGE</div>
+                                </a>
+                                <div class="item-info">
+                                    <span class="item-name">
+                                        <a href="item_detail.html">サンプル景品 06</a>
+                                    </span>
+                                    <span class="item-status">
+                                        <a href="prize_not_received.html">獲得：未</a>
+                                    </span>
+                                    <span class="item-location">
+                                        <a href="shop_location.html">Location：店舗名テスト</a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <div class="item-img-placeholder">
+                                    <a href="item_detail.html">IMAGE</a>
+                                </div>
+                                <div class="item-info">
+                                    <span class="item-name">
+                                        <a href="item_detail.html">サンプル景品 07</a>
+                                    </span>
+                                    <span class="item-status">
+                                        <a href="prize_not_received.html">獲得：未</a>
+                                    </span>
+                                    <span class="item-location">
+                                        <a href="shop_location.html">Location：店舗名テスト</a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <a href="item_detail.html">
+                                    <div class="item-img-placeholder">IMAGE</div>
+                                </a>
+                                <div class="item-info">
+                                    <span class="item-name">
+                                        <a href="item_detail.html">サンプル景品 08</a>
+                                    </span>
+                                    <span class="item-status">
+                                        <a href="prize_not_received.html">獲得：未</a>
+                                    </span>
+                                    <span class="item-location">
+                                        <a href="shop_location.html">Location：店舗名テスト</a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <a href="item_detail.html">
+                                    <div class="item-img-placeholder">IMAGE</div>
+                                </a>
+                                <div class="item-info">
+                                    <span class="item-name">
+                                        <a href="item_detail.html">サンプル景品 09</a>
+                                    </span>
+                                    <span class="item-status">
+                                        <a href="prize_not_received.html">獲得：未</a>
+                                    </span>
+                                    <span class="item-location">
+                                        <a href="shop_location.html">Location：店舗名テスト</a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <a href="item_detail.html">
+                                    <div class="item-img-placeholder">IMAGE</div>
+                                </a>
+                                <div class="item-info">
+                                    <span class="item-name">
+                                        <a href="item_detail.html">サンプル景品 10</a>
+                                    </span>
+                                    <span class="item-status">
+                                        <a href="prize_not_received.html">獲得：未</a>
+                                    </span>
+                                    <span class="item-location">
+                                        <a href="shop_location.html">Location：店舗名テスト</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- UPCOMING TARGETセクション -->
+                    <div class="target-panel">
+                        <h2 class="side-title">UPCOMING TARGET</h2>
+                        <div class="arrival-grid">
+                            <div class="item-card">
+                                <a href="item_detail.html">
+                                    <div class="item-img-placeholder">IMAGE</div>
+                                </a>
+                                <div class="item-info">
+                                    <span class="item-name">
+                                        <a href="item_detail.html">ここに次回の景品名を表示予定</a>
+                                    </span>
+                                    <span class="item-status">入荷予定：04/10</span>
+                                    <span class="item-location">
+                                        <a href="shop_location.html">Location：namco ラゾーナ川崎</a>
+                                    </span>
+                                </div>
+                                <div class="next-badge">NEXT</div>
+                            </div>
+
+                            <div class="item-card">
+                                <a href="item_detail.html">
+                                   <div class="item-img-placeholder">IMAGE</div>
+                                </a>
+                                <div class="item-info">
+                                    <span class="item-name">
+                                        <a href="item_detail.html">ここに次回の景品名を表示予定</a>
+                                    </span>
+                                    <span class="item-status">入荷予定：04/10</span>
+                                    <span class="item-location">
+                                        <a href="shop_location.html">Location：namco ラゾーナ川崎</a>
+                                    </span>
+                                </div>
+                                <div class="next-badge">NEXT</div>
+                            </div>
+
+                            <div class="item-card">
+                                <a href="item_detail.html">
+                                    <div class="item-img-placeholder">IMAGE</div>
+                                </a>
+                                <div class="item-info">
+                                    <span class="item-name">
+                                        <a href="item_detail.html">ここに次回の景品名を表示予定</a>
+                                    </span>
+                                    <span class="item-status">入荷予定：04/10</span>
+                                    <span class="item-location">
+                                        <a href="shop_location.html">Location：namco ラゾーナ川崎</a>
+                                    </span>
+                                </div>
+                                <div class="next-badge">NEXT</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- WEEKLY TARGETS -->
+                    <section class="weekly-section">
+                        <h2 class="section-title">WEEKLY TARGETS</h2>
+                        <div class="weekly-grid">
+                            <div class="target-card-full">
+                                <div class="weekly-day-group">
+                                    <span>こちらは今週入荷予定の景品リスト</span><br/>
+                                    <div class="weely-date">04/08(水)</div>
+                                    <ul class="weekly-list">
+                                        <li>
+                                            <a href="item_detail.html">景品A</a>
+                                            <a href="shop_location.html">(店舗名)</a>
+                                        </li>
+                                        <li>
+                                            <a href="item_detail.html">景品B</a>
+                                            <a href="shop_location.html">(店舗名)</a>
+                                        </li>
+                                        <li>
+                                            <a href="item_detail.html">景品C</a>
+                                            <a href="shop_location.html">(店舗名)</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="weekly-day-group">
+                                    <div class="weely-date">04/09(木)</div>
+                                    <ul class="weekly-list">
+                                        <li>
+                                            <a href="item_detail.html">景品A</a>
+                                            <a href="shop_location.html">(店舗名)</a>
+                                        </li>
+                                        <li>
+                                            <a href="item_detail.html">景品B</a>
+                                            <a href="shop_location.html">(店舗名)</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="weekly-day-group">
+                                    <div class="weely-date">04/10(金)</div>
+                                    <ul class="weekly-list">
+                                        <li>
+                                            <a href="item_detail.html">景品A</a>
+                                            <a href="shop_location.html">(店舗名)</a>
+                                        </li>
+                                        <li>
+                                            <a href="item_detail.html">景品B</a>
+                                            <a href="shop_location.html">(店舗名)</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <aside class="side-bar">
+                    <div class="today-panel">
+                        <!-- 今日日付曜日 -->
+                        <div class="today-label">TODAY</div>
+                        <div class="today-date">04/05</div>
+                        <div class="today-day">(SUN)</div>
+                    </div>
+
+                    <!-- カレンダー表示 -->
+                    <div class="calendar-card">
+                        <div class="calender-header">
+                            <button class="cal-btn">PREV</button>
+                            <a href="list_monthly.html?month=202604" class="current-month">2026.04</a>
+                            <button class="cal-btn">NEXT</button>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>SUN</th>
+                                    <th>MON</th>
+                                    <th>TUE</th>
+                                    <th>WED</th>
+                                    <th>THU</th>
+                                    <th>FRI</th>
+                                    <th>SAT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>01</td>
+                                    <td>02</td>
+                                    <td>03</td>
+                                    <td>04</td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="list.html?date=0405">05</a>
+                                    </td>
+                                    <td>06</td>
+                                    <td>
+                                        <a href="list.html?date=0407">07</a>
+                                    </td>
+                                    <td>08</td>
+                                    <td>09</td>
+                                    <td>10</td>
+                                    <td>11</td>
+                                </tr>
+                                <tr>
+                                    <td>12</td>
+                                    <td>13</td>
+                                    <td>14</td>
+                                    <td>
+                                        <a href="list.html?date=0415">15</a>
+                                    </td>
+                                    <td>16</td>
+                                    <td>17</td>
+                                    <td>18</td>
+                                </tr>
+                                <tr>
+                                    <td>19</td>
+                                    <td>20</td>
+                                    <td>21</td>
+                                    <td>22</td>
+                                    <td>23</td>
+                                    <td>
+                                        <a href="list.html?date=0424">24</a>
+                                    </td>
+                                    <td>25</td>
+                                </tr>
+                                <tr>
+                                    <td>26</td>
+                                    <td>27</td>
+                                    <td>28</td>
+                                    <td>29</td>
+                                    <td>30</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </aside>
+           </div>
+        </div>
+    </body>
+</html>

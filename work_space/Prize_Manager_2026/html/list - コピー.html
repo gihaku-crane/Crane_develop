@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="img/favicon.png" type="image/png" sizes="32x32">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/list.css">
+    <title>LIST | Prize_Manager_2026</title>
+</head>
+<body class="bg-common">
+    <!-- ヘッダー部 -->
+    <header>
+        <div class="header-banner"></div>
+
+        <div class="header-content">
+            <h1 class="header-title">
+                <a href="Top.html">Prize_Manager_2026</a>
+            </h1>
+            
+            <nav class="g-nav">
+                <a href="Top.html" class="g-nav-link">HOME</a>
+                <a href="list.html" class="g-nav-link active">LIST</a>
+                <a href="shop.html" class="g-nav-link">SHOP</a>
+                <a href="menu.html" class="g-nav-link">MENU</a>
+            </nav>
+
+            <a href="#" class="add-btn">+ ADD</a>
+        </div>
+    </header>
+    
+    <div class="wrapper">
+        <section class="filter-box">
+            <h2 class="filter-title">SEARCH FILTERS</h2>
+            <div class="filter-form">
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label>キーワード</label>
+                        <input type="text" placeholder="景品名、作品名を入力...">
+                    </div>
+                    <div class="filter-group">
+                        <label>作品タイトル</label>
+                        <select>
+                            <option value="">すべて表示</option>
+                            <option>転生したらスライムだった件</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label>シリーズ名</label>
+                        <input type="text" placeholder="例：Grandista">
+                    </div>
+                    <div class="filter-group date-range">
+                        <label>入荷日（期間指定）</label>
+                        <div class="range-inputs">
+                            <input type="date"> <span>〜</span> <input type="date">
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label>入荷店舗</label>
+                        <select>
+                            <option value="">すべての店舗</option>
+                            <option>ナムコ ラゾーナ川崎</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>獲得状況</label>
+                        <select>
+                            <option value="">すべて</option>
+                            <option>未獲得</option>
+                            <option>獲得済み</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-buttons">
+                <button class="btn-reset">条件リセット</button>
+                <button class="btn-search">この条件で検索する</button>
+            </div>
+        </section>
+
+        <div class="list-utility-bar">
+            <div class="total-count">
+                検索結果：<span>150</span> 件
+            </div>
+            <div class="display-limit">
+                表示件数：
+                <select>
+                    <option value="10">10</option>
+                    <option value="30" selected>30</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="list-container">
+            <div class="list-head">
+                <div class="cell-img">景品画像</div>
+                <div class="cell-info sortable">景品名 / 作品タイトル <i class="icon-filter"></i></div>
+                <div class="cell-series sortable">シリーズ名 <i class="icon-filter"></i></div>
+                <div class="cell-date sortable">入荷日 ▲</div>
+                <div class="cell-shop sortable">入荷店舗 <i class="icon-filter"></i></div>
+                <div class="cell-status sortable">獲得状況 <i class="icon-filter"></i></div>
+                <div class="cell-action">操作</div>
+            </div>
+
+            <div class="list-body">
+                <div class="list-item">
+                    <div class="cell-img"><div class="thumb-box"></div></div>
+                    <div class="cell-info">
+                        <p class="name">リムル=テンペスト Relax time</p>
+                        <p class="title">転生したらスライムだった件</p>
+                    </div>
+                    <div class="cell-series">Relax time</div>
+                    <div class="cell-date">2026/04/07(火)</div>
+                    <div class="cell-shop">ナムコ ラゾーナ川崎</div>
+                    <div class="cell-status"><span class="badge-un">未獲得</span></div>
+                    <div class="cell-action"><button class="btn-edit">編集</button></div>
+                </div>
+                <div class="list-item">
+                    <div class="cell-img"><div class="thumb-box"></div></div>
+                    <div class="cell-info">
+                        <p class="name">チェンソーマン VIBRATION STARS</p>
+                        <p class="title">チェンソーマン</p>
+                    </div>
+                    <div class="cell-series">VIBRATION STARS</div>
+                    <div class="cell-date">2026/04/12(日)</div>
+                    <div class="cell-shop">セガ新宿歌舞伎町</div>
+                    <div class="cell-status"><span class="badge-got">獲得済み</span></div>
+                    <div class="cell-action"><button class="btn-edit">編集</button></div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="pager">
+            <a href="#" class="pager-edge">最初</a>
+            <a href="#" class="pager-nav">前へ</a>
+            <a href="#" class="pager-num active">1</a>
+            <a href="#" class="pager-num">2</a>
+            <span class="pager-dots">...</span>
+            <a href="#" class="pager-num">9</a>
+            <a href="#" class="pager-num">10</a>
+            <a href="#" class="pager-nav">次へ</a>
+            <a href="#" class="pager-edge">最後</a>
+        </nav>
+    </div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+便利SQLメモ
+idが歯抜けしてしまったときの再採番方法
+SET @n := 0;
+UPDATE テーブル名 SET id = @n := @n + 1;
+
+
+
+SET @n := 0;
+UPDATE prizes SET id = @n := @n + 1;
