@@ -1,0 +1,153 @@
+/* ベースレイアウト */
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ページヘッダー */
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px 0;
+}
+
+.page-title {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    text-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+}
+
+.page-subtitle {
+    color: var(--text-sub);
+    font-size: 1rem;
+}
+
+/* メインコンテンツエリア */
+.content-area {
+    background: rgba(30, 41, 59, 0.4);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #334155;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* テーブルのレスポンシブ対応 */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.shop-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--text-main);
+    font-size: 14px;
+    border: 1;
+}
+
+.shop-table th, 
+.shop-table td {
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 1px solid #334155;
+    border: 1;
+}
+
+/* テーブルヘッダー */
+.shop-table th {
+    background: rgba(15, 23, 42, 0.9);
+    color: var(--accent-color);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 13px;
+}
+
+/* ホバーエフェクト */
+.shop-table tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* カラム別スタイル */
+.col-area {
+    width: 140px;
+}
+
+.area-tag {
+    display: inline-block;
+    background: #1e293b;
+    color: #cbd5e1;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    border: 1px solid #475569;
+}
+
+.col-name {
+    font-weight: bold;
+}
+
+.shop-link {
+    color: #38bdf8;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.shop-link:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.col-prizeon {
+    width: 150px;
+    text-align: center !important;
+}
+
+.status-on {
+    color: #4ade80;
+    font-weight: bold;
+    background: rgba(74, 222, 128, 0.1);
+    padding: 4px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.status-off {
+    color: #64748b;
+    font-size: 12px;
+}
+
+.col-address {
+    color: var(--text-sub);
+    max-width: 300px;
+    line-height: 1.5;
+}
+
+/* データなしの場合 */
+.no-data-container {
+    padding: 60px;
+    text-align: center;
+    color: var(--text-sub);
+}
+
+/* モバイル対応：小さな画面では横スクロールを許可しつつフォントを調整 */
+@media (max-width: 768px) {
+    .app-container {
+        padding: 10px;
+    }
+    
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    .shop-table th, 
+    .shop-table td {
+        padding: 12px 10px;
+        font-size: 13px;
+    }
+    
+    .col-area {
+        width: 100px;
+    }
+}

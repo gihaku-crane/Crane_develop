@@ -12,14 +12,9 @@ function handleActionError($e, $user_message) {
     if (session_status() === PHP_SESSION_NONE) session_start();
     $_SESSION['errors'] = [$user_message];
     
-    // 3. リダイレクト先の判定
-    if ($prize_id) {
-        // IDがあるなら詳細画面へ戻る
-        $redirect_url = BASE_URL . '/item_detail.php?id=' . $prize_id;
-    } else {
-        // なければ一覧へ
-        $redirect_url = defined('BASE_URL') ? BASE_URL . '/list.php' : '/list.php';
-    }
+    // 3. 一覧画面へ退避（リダイレクト）
+    // BASE_URL が定義されている前提
+    $redirect_url = defined('BASE_URL') ? BASE_URL . '/list.php' : '/list.php';
     header("Location: " . $redirect_url);
     exit;
 }

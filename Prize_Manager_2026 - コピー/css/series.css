@@ -1,0 +1,106 @@
+/* シリーズ一覧固有スタイル */
+
+.series-section {
+    margin-top: 40px;
+}
+
+.page-title {
+    font-size: 24px;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+.page-title span {
+    font-size: 14px;
+    color: var(--text-sub);
+    margin-left: 10px;
+}
+
+/* テーブル構造 */
+.series-table-wrapper {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.series-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    table-layout: fixed; /* カラム幅を固定して三点リーダーを有効にする */
+}
+
+.series-table th {
+    background-color: #21262d;
+    color: var(--accent-color);
+    text-align: left;
+    padding: 15px;
+    border-bottom: 1px solid #30363d;
+    font-weight: bold;
+}
+
+.series-table td {
+    padding: 15px;
+    border-bottom: 1px solid #30363d;
+    color: var(--text-main);
+    vertical-align: middle; /* セル結合時に中央揃え */
+}
+
+/* メーカー名のセル結合用スタイル */
+.maker-cell {
+    background-color: rgba(0, 212, 255, 0.02);
+    border-right: 1px solid #30363d;
+    font-weight: bold;
+}
+
+/* 絞り込み用リンク */
+.link-filter {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.link-filter:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+/* URL三点リーダー設定 */
+.url-link-ellipsis {
+    display: block;
+    color: var(--text-sub);
+    text-decoration: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; /* はみ出しを「...」にする */
+}
+
+.url-link-ellipsis:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+/* 登録数バッジ */
+.count-badge {
+    background: #30363d;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+/* カラム幅指定 */
+.col-no { width: 50px; }
+.col-maker { width: 200px; }
+.col-series { width: 200px; }
+.col-count { width: 80px; text-align: center; }
+.col-url { width: auto; }
+
+.txt-center { text-align: center; }
+
+/* ホバーエフェクト（行） */
+.series-table tr:hover td:not(.maker-cell) {
+    background-color: rgba(255, 255, 255, 0.02);
+}

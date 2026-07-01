@@ -1,0 +1,422 @@
+/* ==========================================================================
+Prize_Manager_2026: List Page Styles (検索フォームスタイル分離・完全クリーンアップ版)
+========================================================================== */
+:root {
+    /* グリッド列の幅を一括管理 */
+    /* 1:★, 2:画像, 3:景品名 / 作品タイトル, 4:シリーズ名, 5:サイズ, 6:入荷予定日, 7:獲得店舗, 8:獲得状況 */
+    --grid-cols: 40px 110px 2fr 180px 80px 120px 1.2fr 90px;
+
+    /* カラーパレット */
+    --accent-color: #00f7ff;
+    --bg-color: #0d1117;
+    --card-bg: #161b22;
+    --border-color: #30363d;
+    --text-main: #c9d1d9;
+    --text-sub: #8b949e;
+}
+
+/* ==========================================================================
+   1. ベース設定
+   ========================================================================== */
+.bg-common {
+    background-color: var(--bg-color);
+    margin: 0;
+}
+
+.wrapper {
+    max-width: 100%;
+    margin: 30px auto;
+    padding: 0 30px;
+}
+
+/* ==========================================================================
+   2. ユーティリティバー（総数表示・件数切替・結果統計）
+   ========================================================================== */
+.list-utility-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 12px;
+    padding: 0 5px;
+}
+
+.total-count {
+    font-size: 14px;
+    color: var(--text-main);
+}
+
+.total-count span {
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 18px;
+    margin: 0 4px;
+}
+
+/* 件数表示エリアを左右に振り分け */
+.result-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    padding: 0 5px;
+}
+
+.stats-left {
+    display: flex;
+    align-items: baseline;
+    gap: 15px;
+}
+
+.stats-left .total-count {
+    font-size: 14px;
+    color: var(--text-main);
+}
+
+.stats-left .display-range {
+    font-size: 12px;
+    color: var(--text-sub);
+}
+
+.stats-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-sub);
+    font-size: 13px;
+}
+
+/* 小さめのプルダウン用スタイル */
+.input-select-sm {
+    background-color: #2a2a2a;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 12px;
+    outline: none;
+}
+
+.input-select-sm option {
+    background-color: #1f242c;
+    color: #fff;
+}
+
+/* ==========================================================================
+   3. 景品一覧表示 (List Table Grid)
+   ========================================================================== */
+.list-scroll-wrapper {
+    width: 100%;
+    overflow-x: auto; /* 横スクロールを許可 */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--card-bg);
+    box-sizing: border-box;
+}
+
+.list-container {
+    border-radius: 8px;
+    overflow: hidden;
+    min-width: 1000px; /* テーブル全体の最小横幅を確保して見切れを防ぐ */
+}
+
+/* ヘッダー行とデータ行の共通グリッド設定 */
+.list-head, .list-item {
+    display: grid;
+    grid-template-columns: var(--grid-cols);
+    gap: 15px;
+    align-items: center;
+    padding: 12px 20px;
+}
+
+/* 項目名ヘッダー */
+.list-head {
+    background: #1f242c;
+    border-bottom: 2px solid var(--border-color);
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.list-head > div, .list-item > div {
+    padding: 5px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* データ行のアイテム */
+.list-item {
+    border-bottom: 1px solid var(--border-color);
+    transition: background 0.2s;
+}
+
+.list-item:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.01);
+}
+
+.list-item:nth-child(even) {
+    background: var(--card-bg);
+}
+
+.list-item:last-child {
+    border-bottom: none;
+}
+
+.list-item:hover {
+    background: #1c2128;
+}
+
+/* 各セルの詳細定義 */
+.cell-fav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cell-img .thumb-box {
+    width: 90px;
+    height: 90px;
+    background: #252d38;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.prize-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 縦横比を維持して枠いっぱいに綺麗にカバー */
+    display: block;
+}
+
+.no-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--text-sub);
+    background: #252d38;
+}
+
+.cell-info {
+    min-width: 0;
+}
+
+.cell-info a {
+    text-decoration: none;
+}
+
+.cell-info .name {
+    font-weight: bold;
+    font-size: 14px;
+    margin: 0 0 4px 0;
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: color 0.1s;
+}
+
+.cell-info:hover .name {
+    color: var(--accent-color);
+}
+
+.cell-info .title {
+    font-size: 12px;
+    color: var(--text-sub);
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cell-series,
+.cell-size,
+.cell-release,
+.cell-shop {
+    color: var(--text-main);
+    font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cell-shop {
+    white-space: normal; /* 店舗名が複数ある場合は改行を許容 */
+}
+
+.cell-shop a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.1s;
+}
+
+.cell-shop a:hover {
+    color: var(--accent-color);
+}
+
+/* ==========================================================================
+   4. お気に入りボタン (Favorite Star)
+   ========================================================================== */
+.btn-fav {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 5px;
+    transition: transform 0.2s, color 0.2s;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-fav:hover {
+    transform: scale(1.2);
+}
+
+/* お気に入りONの状態（黄色） */
+.star-on {
+    color: #facc15;
+    text-shadow: 0 0 5px rgba(250, 204, 21, 0.4);
+}
+
+/* お気に入りOFFの状態（暗いグレー） */
+.star-off {
+    color: #4b5563;
+}
+
+/* ==========================================================================
+   5. 獲得ステータスバッジ（非同期ボタン）
+   ========================================================================== */
+.badge-un, .badge-got {
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+.badge-un {
+    background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%) !important;
+    color: #000 !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.badge-got {
+    background: linear-gradient(135deg, #00d4db 0%, #00a5ad 100%) !important;
+    color: #000 !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 0.5px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* ホバー時に発光するようなエフェクト */
+.badge-un:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 0 10px rgba(234, 179, 8, 0.4);
+}
+
+.badge-got:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 0 10px rgba(0, 247, 255, 0.4);
+}
+
+/* ==========================================================================
+   6. ページング (Pager)
+   ========================================================================== */
+.pager {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 25px 0;
+}
+
+.pager a, .pager span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 6px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    box-sizing: border-box;
+    transition: all 0.2s;
+}
+
+.pager a:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+.pager-num.active {
+    background: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+    color: #0d1117 !important;
+}
+
+.pager-edge, .pager-nav {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.pager-dots {
+    border: none !important;
+    background: transparent !important;
+    color: var(--text-sub);
+    cursor: default;
+}
+
+/* ==========================================================================
+   7. トースト通知 (Toast Message)
+   ========================================================================== */
+.toast-container {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    pointer-events: none;
+}
+
+.toast {
+    background-color: rgba(22, 27, 34, 0.95);
+    border: 1px solid var(--border-color);
+    color: #ffffff;
+    padding: 12px 28px;
+    border-radius: 50px;
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    animation: fade-in-out 2.5s ease-in-out forwards;
+}
+
+@keyframes fade-in-out {
+    0% { opacity: 0; transform: translateY(20px); }
+    15% { opacity: 1; transform: translateY(0); }
+    85% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-20px); }
+}

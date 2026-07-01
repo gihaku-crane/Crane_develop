@@ -35,27 +35,10 @@ $offset = ($page < 1) ? 0 : ($page - 1) * $limit;
 $where_clauses = [];
 $params = [];
 if ($keyword !== '') { $where_clauses[] = "p.name LIKE :keyword"; $params[':keyword'] = '%' . $keyword . '%'; }
-
-// 日付の処理
-if (!empty($arrival_date_start) && !empty($arrival_date_end)) {
-    $where_clauses[] = "p.Arrival_date BETWEEN :start AND :end";
-    $params[':start'] = $arrival_date_start;
-    $params[':end']   = $arrival_date_end;
-} elseif (!empty($arrival_date_start)) {
-    $where_clauses[] = "p.Arrival_date >= :start";
-    $params[':start'] = $arrival_date_start;
-} elseif (!empty($arrival_date_end)) {
-    $where_clauses[] = "p.Arrival_date <= :end";
-    $params[':end']   = $arrival_date_end;
-}
-
 if ($title_filter !== '') { $where_clauses[] = "p.title_id = :title_id"; $params[':title_id'] = $title_filter; }
-
 if (!empty($series_id)) { $where_clauses[] = "p.SERIES_ID = :series_id"; $params[':series_id'] = $series_id; }
-
 // ... (日付などのWHERE条件組み立てはここ) ...
 if ($shop_filter !== '') { $where_clauses[] = "EXISTS (SELECT 1 FROM prize_shops ps2 WHERE ps2.prize_id = p.id AND ps2.shop_id = :shop_id)"; $params[':shop_id'] = $shop_filter; }
-
 if ($status === 'got') { $where_clauses[] = "p.got_status = 'got'"; } 
 elseif ($status === 'un') { $where_clauses[] = "(p.got_status = 'un' OR p.got_status IS NULL OR p.got_status = '')"; }
 
@@ -70,8 +53,3 @@ $masterData = getMasterData($pdo);
 $all_titles = $masterData['titles'];
 $all_series = $masterData['series'];
 $all_shops  = $masterData['shops'];
-
-// ページャー（上部）
-$current_page = $page;
-$t_count = $total_all_results;
-$t_limit = $limit;
