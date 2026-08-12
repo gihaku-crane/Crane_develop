@@ -237,8 +237,8 @@
 
 /* --- サイドバー --- */
 .side-bar {
-    /* サイドバーの幅を300pxに固定 */
-    width: 300px;
+    /* サイドバーの幅を250pxに固定(縦ラインを合わせる) */
+    width: 250px;
     /* 幅が狭まっても縮まないように固定 */
     flex-shrink: 0;
     /* ★左側に境界線を追加：ここが棒線の正体 */
@@ -263,6 +263,8 @@
     margin-bottom: 20px;
     /* 文字の色を黄色に */
     color: #facc15;
+    /*パネルの幅を良い感じに調整*/
+    width: 300px;
 }
 
 /* --- 今日パネル：日付数字 --- */
@@ -560,6 +562,72 @@
     border-radius: 50%;                   /* 円形にする */
     filter: brightness(1.5);              /* 明るさアップ */
     box-shadow: 0 0 10px rgba(0, 212, 255, 0.5); /* 周囲に青い光 */
+}
+
+/* =========================================
+   PRIZE CAROUSEL SLIDER (自動スライド対応)
+   ========================================= */
+
+.prize-slider-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.prize-slider-container {
+    overflow: hidden;
+    width: 100%;
+    /* 5列分のカードが綺麗に収まるようにエリアを確保 */
+}
+
+.prize-slider-track {
+    display: flex;
+    gap: 12px;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* スライダー内の各カード幅（5列表示に合わせる場合、calcで調整） */
+.prize-slider-track > .item-card {
+    flex: 0 0 calc((100% - 48px) / 5); /* 12px × 4隙間 = 48px */
+    max-width: calc((100% - 48px) / 5);
+    box-sizing: border-box;
+}
+
+/* 左右の手動スライドボタン */
+.slider-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--accent-color);
+    font-size: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.slider-btn:hover {
+    background: var(--accent-color);
+    color: #000;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.prev-btn {
+    left: -18px;
+}
+
+.next-btn {
+    right: -18px;
 }
 
 /* --- (以上、全プロパティの定義と解説を完了) --- */

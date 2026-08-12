@@ -1,0 +1,41 @@
+/* 重心プロッターのスタイル */
+.gravity-box {
+    width: 200px;
+    height: 280px;
+    border: 2px solid #333;
+    position: relative;
+    background: #f9f9f9;
+    margin: 20px auto;
+}
+.guide-line-v {
+    position: absolute;
+    left: 50%; top: 0; bottom: 0;
+    width: 1px;
+    background: rgba(255, 0, 0, 0.3);
+}
+.guide-line-h {
+    position: absolute;
+    top: 50%; left: 0; right: 0;
+    height: 1px;
+    background: rgba(255, 0, 0, 0.3);
+}
+.gravity-marker {
+    position: absolute;
+    width: 30px; height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-weight: bold;
+    color: red;
+    font-size: 24px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: all 0.2s ease;
+}
+.click-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 100%; height: 100%;
+}
+.grid-cell { cursor: pointer; }
+.grid-cell:hover { background: rgba(0, 0, 0, 0.05); }

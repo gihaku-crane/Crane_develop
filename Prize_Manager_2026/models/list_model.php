@@ -20,7 +20,7 @@ function getAllPrizes($pdo) {
  * 景品データの検索と取得を行う
  */
 function getPrizesData($pdo, $params, $where_sql, $limit, $offset) {
-    // search_logicから移植したSQL組み立て・実行ロジックをここに書く
+    // list_controllerから移植したSQL組み立て・実行ロジックをここに書く
     $base_sql = " FROM prizes p 
               LEFT JOIN titles t ON p.title_id = t.id 
               LEFT JOIN series s ON p.SERIES_ID = s.id 

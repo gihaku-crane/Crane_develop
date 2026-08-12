@@ -42,11 +42,11 @@ if (!empty($shop['location_detail'])) $feature_tags[] = $shop['location_detail']
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/shop_detail.css">
 </head>
-<body>
-    <div class="app-container">
-        <!-- ヘッダー部 -->
+<body class="bg-common">
+    <!-- ヘッダー部 -->
     <?php output_header('shop_detail'); ?>
 
+    <div class="app-container">
         <!-- パンくずリスト -->
         <nav class="breadcrumb">
             <a href="shop_list.php">店舗一覧</a> <span>/</span> <?php echo htmlspecialchars($shop['name']); ?>

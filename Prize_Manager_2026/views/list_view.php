@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/list.css">
     <link rel="stylesheet" href="css/search_form.css">
-    
+
     <script src="js/common_actions.js"></script>
     <script src="js/list.js"></script>
 
@@ -34,7 +34,7 @@
             <?php unset($_SESSION['errors']); ?>
         <?php endif; ?>
         <!-- 検索フォーム（外部ファイル）を読み込み -->
-        <?php include 'search_form.php'; ?>
+        <?php include 'list/search_form.php'; ?>
 
         <div class="list-utility-bar">
             <div class="total-count">

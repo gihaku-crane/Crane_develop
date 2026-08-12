@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/item_detail.css">
     <link rel="stylesheet" href="css/modal_edit.css">
+    <link rel="stylesheet" href="css/modal_gravity.css">
 
 
 </head>
@@ -129,7 +130,7 @@
                 <!-- 重心予測 -->
                     <div class="spec-item">
                         <div class="spec-info">
-                            <label>重心予測</label>
+                            <label>重心予測情報</label>
                             <div class="spec-value highlight">
                                 <span class="gravity-text">
                                     <?php 
@@ -137,11 +138,12 @@
                                         echo $g_info . "重心";
                                     ?>
                                 </span>
-                                <label for="modal-toggle" class="evidence-link-text">（※画像で確認）</label>
+                                <span class="evidence-link-text" onclick="openImageModal()">（※画像で確認）</span>
                             </div>
                         </div>
-                        <button type="button" class="row-edit-btn" data-target="edit_gravity">✎</button>
+                        <button type="button" class="row-edit-btn" onclick="openGravityModal(<?= $row['id'] ?>)">✎</button>
                         
+                        <!-- 既存の画面用モーダル(チェックボックス開閉式) -->
                         <input type="checkbox" id="modal-toggle" class="modal-checker">
                         <div class="modal-overlay">
                             <label for="modal-toggle" class="modal-close-bg"></label>
@@ -151,6 +153,7 @@
                             </div>
                         </div>
                     </div>
+                    <?php include 'views/detail/modal_gravity.php'; ?>
 
                     <!-- 実際の重心 -->
                     <div class="spec-item">
@@ -188,7 +191,7 @@
             <?php foreach ($related_prizes as $rel): ?>
                 <a href="item_detail.php?id=<?= $rel['id'] ?>" class="related-item-link" title="<?= htmlspecialchars($rel['name']) ?>">
                     <div class="related-item">
-                        <img src="<?= !empty($rel['image_url']) ? htmlspecialchars($rel['image_url']) : 'img/no_image.png' ?>" alt="<?= htmlspecialchars($rel['name']) ?>">
+                        <img src="<?= !empty($rel['image_url']) ? htmlspecialchars($rel['image_url']) : 'img/gallery_sample1.png' ?>" alt="<?= htmlspecialchars($rel['name']) ?>">
                     </div>
                 </a>
             <?php endforeach; ?>
