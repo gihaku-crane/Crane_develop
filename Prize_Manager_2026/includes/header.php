@@ -1,10 +1,14 @@
 <?php
 /**
  * header.php
- * 全画面共通のヘッダー部分を生成する関数を定義しています。
- * * @param string $current_page 現在表示中のページ識別子（'top', 'list' など）
+ * 全画面共通のヘッダー出力を管理
+ * 
  */
 
+/**
+ * 共通ヘッダーを出力する関数
+ * @param string $current_page 現在表示中のページ識別子（'top', 'list' 等）
+ */
 function output_header($current_page) {
     // セッションを開始（まだ開始されていない場合）
     if (session_status() === PHP_SESSION_NONE) {
@@ -12,15 +16,13 @@ function output_header($current_page) {
     }
     $is_debug_mode = $_SESSION['debug_mode'] ?? false;
 
-    // --- 1. メニュー項目とファイル名の対応設定 ---
-    // 左側のキーが $current_page と比較される名前、右側が実際のリンク先ファイル名です。
+    // 2. ナビゲーションメニューの定義
+    // 'キー' => 'リンク先ファイル名'
     $nav_items = [
         'top'    => 'Top.php',
         'list'   => 'list.php',
-        /*'detail'   => 'item_detail.php',*/
         'shop'   => 'shop_list.php',
-/*        'shop_detail'   => 'shop_detail.php',*/
-        'series' => 'series.php',
+        'series' => 'series_list.php',
         'menu'   => 'menu.php'
     ];
 ?>
@@ -42,11 +44,13 @@ function output_header($current_page) {
                          現在のページ($current_page)とメニューのキー($key)が一致する場合、
                          CSSで強調表示するための 'active' クラスを付与します。
                     -->
-                    <a href="<?php echo BASE_URL . $file; ?>" 
-                       class="g-nav-link<?php echo ($current_page === $key) ? ' active' : ''; ?>">
-                       <!-- strtoupper() 関数で、'top' を 'TOP' のように全て大文字に変換して表示 -->
+                    <?php
+                    // 現在のページなら 'active' クラスを付与
+                    $is_active = ($current_page === $key) ? ' active' : '';
+                    ?>
+                        <a href="<?php echo BASE_URL . $file; ?>" class="g-nav-link <?php echo $is_active; ?>">
+                        <!-- strtoupper() 関数で、全て大文字に変換して表示 -->
                         <?php echo strtoupper($key); ?>
-
                     </a>
                 <?php endforeach; ?>
             </nav>
@@ -58,8 +62,9 @@ function output_header($current_page) {
                     </button>
                 </form>
 
-            <!-- 景品追加用のアクションボタン（リンク先は今後実装予定） -->
-            <a href="add_prize.php" class="add-btn">+ ADD PRIZE</a>
+                <!-- 景品追加用のアクションボタン（リンク先は今後実装予定） -->
+                <a href="add_prize.php" class="add-btn">+ ADD PRIZE</a>
+            </div>
         </div>
     </header>
     <?php

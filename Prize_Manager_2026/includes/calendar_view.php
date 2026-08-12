@@ -11,17 +11,19 @@
 
 
 // このブロックは本番公開時には削除するかコメントアウトしてください
-$debug_mode = true; 
+// セッション等でデバッグモードが有効になっているかチェックする例
+$debug_mode = isset($_SESSION['debug_mode']) && $_SESSION['debug_mode'] === true;
 
 if ($debug_mode) {
     echo "<!-- DEBUG START -->";
-    echo "<div style='display:none;'>"; // 開発者ツールのソース表示でのみ確認したい場合
-    echo "DEBUG: pdo exists? " . (isset($pdo) ? 'Yes' : 'No') . "\n";
-    echo "DEBUG: cal exists? " . (isset($cal) ? 'Yes' : 'No') . "\n";
-    echo "DEBUG: year = " . ($year ?? 'NULL') . "\n";
-    echo "DEBUG: month = " . ($month ?? 'NULL') . "\n";
+    echo "<div style='border:1px solid #58a6ff; padding:10px; background:#161b22; color:#58a6ff; font-size:12px; margin-bottom:15px; border-radius:6px;'>";
+    echo "<strong>[TIME DEBUG INFO]</strong><br>";
+    echo "PHP date_default_timezone: " . date_default_timezone_get() . "<br>";
+    echo "PHP current time (Y-m-d H:i:s): " . date('Y-m-d H:i:s') . "<br>";
+    echo "PHP current date (Y-m-d): " . date('Y-m-d') . "<br>";
+    echo "DEBUG: pdo exists? " . (isset($pdo) ? 'Yes' : 'No') . "<br>";
+    echo "DEBUG: year = " . ($year ?? 'NULL') . " / month = " . ($month ?? 'NULL') . "<br>";
     echo "</div>";
-
 }
 
 // 1. 変数の存在確認
@@ -142,7 +144,11 @@ $next_month = date('Y-m', mktime(0, 0, 0, (int)$month + 1, 1, (int)$year));
                                     // %02d に修正済み
                                 $target_date = sprintf('%04d-%02d-%02d', (int)$year, (int)$month, (int)$day_info['day']);
                                 //$target_date = sprintf('%04d-%02d-%02d', (int)$year, (int)$month, (int)$day_info['day']);
-                                $link_url = "list.php?arrival_date_start=" . htmlspecialchars($target_date, ENT_QUOTES, 'UTF-8') . "&search=1";
+                                $link_url = "list.php?arrival_date_start=" . 
+                                    htmlspecialchars($target_date, ENT_QUOTES, 'UTF-8') . 
+                                    "&arrival_date_end=" . 
+                                    htmlspecialchars($target_date, ENT_QUOTES, 'UTF-8') . 
+                                    "&search=1";
                                 //$link_url = "list.php?date=" . htmlspecialchars($target_date, ENT_QUOTES, 'UTF-8');
                                 ?>
                                 

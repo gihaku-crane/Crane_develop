@@ -2,6 +2,8 @@
 /**
  * カレンダー生成ロジック
  */
+// サーバーのタイムゾーンを強制的に日本時間に設定する
+date_default_timezone_set('Asia/Tokyo');
 
 function getCalendarData($pdo, $year, $month) {
     // 前月・翌月の計算

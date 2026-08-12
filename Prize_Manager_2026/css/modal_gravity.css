@@ -1,0 +1,11 @@
+/* 重心設定モーダル専用のスタイル */
+#gravityModal {
+    display: none; /* 初期は非表示 */
+    position: fixed;
+    z-index: 9999;
+    /* その他、モーダルの配置やサイズ設定 */
+}
+
+#gravityModal .modal-content {
+    /* モーダルの中身のスタイル */
+}

@@ -41,9 +41,9 @@ try {
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/shop_list.css">
 </head>
-<body>
+<body class="bg-common">
+    <?php output_header('shop'); ?>
     <div class="app-container">
-        <?php output_header('shop'); ?>
         <header class="page-header">
             <h1 class="page-title">店舗一覧</h1>
             <p class="page-subtitle">近隣のゲームセンターとPrizeON対応状況</p>

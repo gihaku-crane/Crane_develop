@@ -36,18 +36,82 @@ list.css から完全に分離独立させて競合をゼロにするため、
 .filter-rows-container {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    gap: 20px;
 }
 
 .filter-row {
     display: flex;
     gap: 30px;
-    width: 100%;
-    box-sizing: border-box;
+    align-items: flex-start;
+}
+
+.filter-left-area {
+    flex: 1;
 }
 
 .filter-row:not(:last-child) {
     margin-bottom: 20px;
+}
+
+/* フィルターの並びを確実に横並びにするための追加設定 */
+.filter-row-flex {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    flex-wrap: wrap; /* 横幅が狭い場合は折り返すようにする */
+}
+
+/* 右側のエリアの幅を固定して縦ラインを揃える */
+.filter-right-area {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-left: auto;
+}
+
+
+/* [修正] レイアウト構造の変更に伴う追加・変更 */
+.filter-wrapper {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    flex-wrap: wrap; /* 画面幅が狭い場合は折り返し */
+}
+
+/* [修正] 左カラムと右カラムを均等に配置 */
+.filter-col-left, .filter-col-right {
+    flex: 1;
+    min-width: 350px; /* 縦ライン維持のための最小幅 */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* [修正] ラジオボタン等の行配置 */
+.status-row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+/* 既存のフォーム要素の幅制限等はそのまま維持 */
+.filter-group input[name="keyword"],
+.filter-group select {
+    width: 350px !important;
+}
+
+/* 検索ボタンエリアの調整 */
+.filter-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.filter-group-wrapper {
+    display: flex;
+    gap: 30px;
 }
 
 /* 各項目のグループ化 */
@@ -289,7 +353,7 @@ select[name="shop"],
     display: flex;
     justify-content: flex-end;
     gap: 10px;
-    margin-top: 20px;
+    width: 100%;
 }
 
 .btn-reset, .btn-search {

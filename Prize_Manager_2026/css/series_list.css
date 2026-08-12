@@ -1,0 +1,92 @@
+/* シリーズ一覧専用スタイル */
+/* ページ全体のメインコンテナ（ヘッダーの下に隠れないように余白を確保） */
+.wrapper {
+    max-width: 1200px;
+    margin: 140px auto 40px auto; /* 上部のヘッダーに隠れないようマージンを確保 */
+    padding: 0 20px;
+}
+
+.page-title {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #30363d;
+    padding-bottom: 10px;
+}
+
+.maker-section { 
+    margin-bottom: 40px; 
+}
+
+.maker-title { 
+    font-size: 1.5rem; 
+    color: var(--accent-color); 
+    border-bottom: 2px solid #30363d; 
+    padding-bottom: 10px; 
+    margin-bottom: 20px; 
+}
+
+/* グリッドレイアウトを確実に横並びにする設定 */
+.series-grid { 
+    display: grid !important; 
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important; 
+    gap: 20px !important; 
+    width: 100% !important;
+}
+
+/* 神々しいゴールドの輝きと高級感のあるグラデーション */
+.series-card { 
+    background: linear-gradient(135deg, #3d3420 0%, #1a160d 50%, #2e2617 100%) !important;
+    border: 1px solid #ffd700 !important;
+    border-radius: 10px !important; 
+    padding: 10px !important; 
+    text-align: center !important; 
+    transition: 0.3s !important; 
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 170px !important; 
+    box-sizing: border-box !important;
+    box-shadow: inset 0 1px 0 rgba(255, 230, 128, 0.4), 0 4px 15px rgba(255, 215, 0, 0.25) !important;
+}
+
+.series-card:hover { 
+    border-color: #ffea75 !important;
+    transform: translateY(-4px) !important; 
+    box-shadow: inset 0 1px 0 rgba(255, 240, 180, 0.6), 0 6px 25px rgba(255, 215, 0, 0.5) !important;
+}
+
+/* リンクをカード内いっぱいに広げる */
+.series-link {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    text-decoration: none !important;
+}
+
+/* ロゴの背景にしっかりとした白ベースを敷いて視認性を上げる */
+.series-img { 
+    max-width: 100% !important; 
+    max-height: 120px !important; 
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important; 
+    border-radius: 4px !important; 
+    margin: auto 0 !important; 
+    background: #ffffff !important; /* 完全な白ベースにしてロゴをくっきりさせる */
+    padding: 8px !important; 
+}
+
+.series-name { 
+    font-size: 14px; 
+    font-weight: bold; 
+    color: #fff; 
+}
+
+.series-name-fallback {
+    font-size: 13px;
+    color: #8b949e;
+}
