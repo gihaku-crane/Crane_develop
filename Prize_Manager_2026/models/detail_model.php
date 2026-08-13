@@ -6,16 +6,36 @@
  * 関連するシリーズ名やショップ一覧も結合して取得
  */
 function getPrizeById($pdo, $id) {
-    $sql = "SELECT p.*, s.name as series_name, 
-                   GROUP_CONCAT(sh.name SEPARATOR '<br>') as shop_list
+    // JOIN先を prize_shops_flag (psf) に変更
+    $sql = "SELECT p.*, s.name as series_name, psf.*
             FROM prizes p
             LEFT JOIN series s ON p.series_id = s.id
-            LEFT JOIN prize_shops ps ON p.id = ps.prize_id
-            LEFT JOIN shops sh ON ps.shop_id = sh.id
-            WHERE p.id = ? GROUP BY p.id";
+            LEFT JOIN prize_shops_flag psf ON p.id = psf.prize_id
+            WHERE p.id = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$id]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    $prize = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // ここでショップ名を組み立てる
+    if ($prize) {
+        // 店舗マスタを優先度順で取得
+        $stmt_shops = $pdo->query("SELECT id, name FROM shops ORDER BY priority ASC");
+        $all_shops = $stmt_shops->fetchAll(PDO::FETCH_KEY_PAIR);
+
+        $shop_names = [];
+        // shop_1 から shop_12 までのフラグをチェック
+        for ($i = 1; $i <= 12; $i++) {
+            if (!empty($prize['shop_' . $i]) && $prize['shop_' . $i] == 1) {
+                if (isset($all_shops[$i])) {
+                    $shop_names[] = $all_shops[$i];
+                }
+            }
+        }
+        // 表示テンプレート側が期待する <br> 区切りの文字列を作成
+        $prize['shop_list'] = !empty($shop_names) ? implode('<br>', $shop_names) : '';
+    }
+
+    return $prize;
 }
 
 /**

@@ -40,7 +40,7 @@
 
                 <div class="form-group">
                     <label>入荷予定日</label>
-                    <input type="date" name="arrival_date" value="<?= htmlspecialchars($row['arrival_date'] ?? '') ?>">
+                    <input type="date" name="arrival_date" id="arrival_date" value="<?= htmlspecialchars($row['arrival_date'] ?? '') ?>">
                 </div>
 
                 <div class="form-group">

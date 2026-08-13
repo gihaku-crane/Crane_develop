@@ -20,12 +20,11 @@ function getAllPrizes($pdo) {
  * 景品データの検索と取得を行う
  */
 function getPrizesData($pdo, $params, $where_sql, $limit, $offset) {
-    // list_controllerから移植したSQL組み立て・実行ロジックをここに書く
+    // prize_shops_flagテーブルを使用するように変更
     $base_sql = " FROM prizes p 
               LEFT JOIN titles t ON p.title_id = t.id 
               LEFT JOIN series s ON p.SERIES_ID = s.id 
-              LEFT JOIN prize_shops ps ON p.id = ps.prize_id
-              LEFT JOIN shops sh ON ps.shop_id = sh.id" 
+              LEFT JOIN prize_shops_flag psf ON p.id = psf.prize_id"
             . $where_sql;
 
     // 全ヒット件数の算出
@@ -34,11 +33,11 @@ function getPrizesData($pdo, $params, $where_sql, $limit, $offset) {
     $count_stmt->execute($params);
     $total_all_results = (int)$count_stmt->fetchColumn();
 
-    // 景品データの取得（入荷予定日の降順、かつIDの降順）
-    $data_sql = "SELECT p.*, t.name as official_name, s.name as series_name,
-                 GROUP_CONCAT(DISTINCT sh.short_name ORDER BY sh.priority ASC SEPARATOR ',') AS shop_short_names "
+    // 景品データの取得
+    // 各ショップのフラグ情報をそのまま取得する
+    // psf.* を指定して店舗フラグ情報を取得するように変更
+    $data_sql = "SELECT p.*, t.name as official_name, s.name as series_name, psf.* "
                 . $base_sql 
-                . " GROUP BY p.id "
                 . " ORDER BY p.Arrival_date DESC, p.id DESC "
                 . " LIMIT :limit OFFSET :offset";
 
@@ -51,11 +50,26 @@ function getPrizesData($pdo, $params, $where_sql, $limit, $offset) {
     $stmt->execute();
     $prizes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // プルダウン等のマスタ表示データ
-    $all_titles = $pdo->query("SELECT * FROM titles ORDER BY kana_index ASC, name ASC")->fetchAll();
-    $all_series = $pdo->query("SELECT * FROM series ORDER BY name ASC")->fetchAll();
-    $all_shops  = $pdo->query("SELECT * FROM shops ORDER BY priority ASC")->fetchAll();
+    // 各景品のフラグ（shop_1～12）を解析し、店舗名リスト（shop_short_names）を再構築する処理
+    if (!empty($prizes)) {
+        $stmt_shops = $pdo->query("SELECT id, short_name FROM shops ORDER BY priority ASC");
+        $all_shops = $stmt_shops->fetchAll(PDO::FETCH_KEY_PAIR); // [1 => '店舗名1', 2 => '店舗名2', ...]
 
+        foreach ($prizes as &$prize) {
+            $short_names = [];
+            // shop_1 から shop_12 までのフラグを順次判定
+            for ($i = 1; $i <= 12; $i++) {
+                if (!empty($prize['shop_' . $i]) && $prize['shop_' . $i] == 1) {
+                    if (isset($all_shops[$i])) {
+                        $short_names[] = $all_shops[$i];
+                    }
+                }
+            }
+            // 画面側（list_view.php）が参照している変数名に合わせる
+            $prize['shop_short_names'] = !empty($short_names) ? implode(',', $short_names) : '';
+        }
+        unset($prize);
+    }
     // 関数からデータを返すようにする
     return [
         'prizes' => $prizes,

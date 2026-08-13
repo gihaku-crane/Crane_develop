@@ -52,14 +52,30 @@ $series_list    = getAllSeries($pdo);
 // *****************************************
 
 // 1. 全店舗リスト（プルダウン用）
-$modal_all_shops = $pdo->query("SELECT id, name FROM shops")->fetchAll(PDO::FETCH_ASSOC);
+$modal_all_shops = $pdo->query("SELECT id, name FROM shops ORDER BY priority ASC")->fetchAll(PDO::FETCH_ASSOC);
 
 // 現在登録されている店舗情報を取得
 $stmt_current_shops = $pdo->prepare("
-    SELECT s.id, s.name 
-    FROM shops s
-    JOIN prize_shops ps ON s.id = ps.shop_id
-    WHERE ps.prize_id = ?
+    SELECT * 
+    FROM prize_shops_flag 
+    WHERE prize_id = ?
 ");
 $stmt_current_shops->execute([$id]);
-$current_shops = $stmt_current_shops->fetchAll(PDO::FETCH_ASSOC);
+$current_shop_row = $stmt_current_shops->fetch(PDO::FETCH_ASSOC);
+
+$current_shops = [];
+if ($current_shop_row) {
+    // 店舗マスタの配列を取得
+    $all_shops_master = $pdo->query("SELECT id, name FROM shops")->fetchAll(PDO::FETCH_KEY_PAIR);
+    // フラグが立っている店舗IDを取得して配列にする
+    for ($i = 1; $i <= 12; $i++) {
+        if (!empty($current_shop_row['shop_' . $i]) && $current_shop_row['shop_' . $i] == 1) {
+            if (isset($all_shops_master[$i])) {
+                $current_shops[] = [
+                    'id'   => $i,
+                    'name' => $all_shops_master[$i]
+                ];
+            }
+        }
+    }
+}
