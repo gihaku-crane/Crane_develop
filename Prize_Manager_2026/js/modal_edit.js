@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
             el.disabled = (el.name !== 'id'); // ID以外は無効
         });
 
-        // ★追加：値をフォームにセットする処理
+        // 値をフォームにセットする処理
         // targetId に応じて、モーダル内の対応する input の name 属性を指定します
         // 例えば、arrival_date であれば name="arrival_date" の input を探します
         if (initialValue) {
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } else {
             // 指定されたIDの要素を有効化
-            const targetEl = document.getElementById(targetId);
+            const targetEl = document.getElementById(targetId) || modal.querySelector(`[name="${targetId}"]`);
             if (targetEl) {
                 targetEl.disabled = false;
             }
