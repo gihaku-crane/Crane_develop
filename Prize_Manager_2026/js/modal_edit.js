@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 【修正】フォーム送信処理
+    // フォーム送信処理
     const editForm = modal.querySelector('form');
     if (editForm) {
         editForm.addEventListener('submit', async (e) => {

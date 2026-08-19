@@ -73,15 +73,30 @@
                 <textarea name="gravity_actual" id="edit_gravity_actual"><?= htmlspecialchars($row['gravity_actual'] ?? '') ?></textarea>
             </div>
 
+            <!-- メイン画像用(確認・差し替え用) -->
             <div class="form-group">
-                <label>ギャラリー画像（追加・更新）</label>
-                <div id="galleryContainer">
-                    <div class="gallery-input-row" style="margin-bottom: 10px;">
-                        <input type="file" name="gallery_images[]" accept="image/*">
-                        <input type="text" name="gallery_urls[]" placeholder="URL直接入力">
-                    </div>
+                <label>メイン画像</label>
+                <div class="modal-image-group">
+                    <input type="file" name= "main_image" accept="image/*">
+                    <input type="text" name="main-image-url" value="<?= htmlspecialchars($row['image_url'] ?? '') ?>" placeholder="メイン画像のURL">
                 </div>
-                <button type="button" id="addGalleryBtn" class="btn-add">+ ギャラリー画像を追加</button>
+            </div>
+
+            <!-- ギャラリー画像用(固定3枚→7枚に拡大) -->
+            <div class="form-group">
+                <label>ギャラリー画像(最大7枚まで)</label>
+                <div id="galleyContainer">
+                    <?php
+                    for($i=1; $i <= 7; $i++):
+                        $colName = 'image_url'.$i;
+                        $currentVal = $row[$colName] ?? '';
+                    ?>
+                        <div class="gallery-input-row">
+                            <input type="file" name="gallery_images[]" accept="image/*">
+                            <input type="text" name="gallery_urls[]" value="<?= htmlspecialchars($currentVal) ?>" placeholder="ギャラリー<?= $i ?> URL">
+                        </div>
+                    <?php endfor; ?>
+                </div>
             </div>
 
             <div class="modal-actions" style="text-align:right; margin-top: 20px;">

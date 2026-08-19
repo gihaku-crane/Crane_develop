@@ -14,6 +14,10 @@
     <link rel="stylesheet" href="css/modal_edit.css">
     <link rel="stylesheet" href="css/modal_gravity.css">
 
+    <script>
+        // PHP側で保持している画像配列を、JavaScriptのグローバル変数として渡す
+        const galleryImages = <?= json_encode(array_values($displayImages)) ?>;
+    </script>
 
 </head>
 <body class="bg-common">
@@ -44,27 +48,35 @@
         </section>
 
         <div class="detail-main-layout">
-            <!-- 左側：ギャラリー（常に4枚表示） -->
-            <div class="gallery-container">
-                <?php for($i=0; $i<4; $i++): ?>
-                    <input type="radio" name="gallery" id="img<?= $i ?>" <?= $i === 0 ? 'checked' : '' ?>>
-                <?php endfor; ?>
-                
+            <!-- 左側：ギャラリー（常に4枚表示 ＋ スライダー制御用コンテナ） -->
+            <div class="gallery-container" id="gallerySlider">
+                <!-- 1. メイン画像エリア -->
                 <div class="main-img-box">
-                    <?php for($i=0; $i<4; $i++): ?>
+                    <?php foreach($displayImages as $i => $imgUrl): ?>
                     <div class="main-img main-i<?= $i ?>">
-                        <img src="<?= htmlspecialchars($displayImages[$i]) ?>" alt="景品画像<?= $i + 1 ?>">
+                        <!-- メイン画像にJSが操作するための id="mainGalleryImage" を付与（最初の1枚目、または共通で付与） -->
+                        <img src="<?= htmlspecialchars($imgUrl) ?>" alt="景品画像<?= $i + 1 ?>">
                     </div>
-                    <?php endfor; ?>
+                    <?php endforeach; ?>
                 </div>
 
-                <div class="sub-img-list">
-                    <?php for($i=0; $i<4; $i++): ?>
-                        <label for="img<?= $i ?>" class="thumb thumb<?= $i ?>">
-                            <img src="<?= htmlspecialchars($displayImages[$i]); ?>" alt="サムネイル<?= $i + 1 ?>">
-                        </label>
-                    <?php endfor; ?>
+                <!-- 2. サムネイル＆ナビエリア -->
+                <div class="gallery-nav-area">
+                    <button type="button" id="galleryPrevBtn" class="nav-btn">&lt;</button>
+                    
+                    <div class="sub-img-viewport">
+                        <div class="sub-img-list" id="subImgList">
+                            <?php foreach($displayImages as $i => $imgUrl): ?>
+                                <div class="thumb-item" data-index="<?= $i ?>">
+                                    <img src="<?= htmlspecialchars($imgUrl) ?>" alt="サムネイル<?= $i + 1 ?>">
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+
+                    <button type="button" id="galleryNextBtn" class="nav-btn">&gt;</button>
                 </div>
+
                 <div class="prize-memo-container">
                     <h3 class="memo-title">景品説明</h3>
                     <div class="memo-content">
@@ -207,7 +219,7 @@
         </div>
     </div>
 
-    <script src="js/common.js"></script>
+    <script src="js/common_slider.js"></script>
     <script src="js/item_detail.js"></script>
 
     <?php require_once __DIR__ . '/modal_edit_view.php'; ?>

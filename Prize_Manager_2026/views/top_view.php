@@ -16,7 +16,18 @@ if (!empty($upcoming_prizes)) {
     }
 }
 ?>
-
+<script src="js/common_slider.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // TOP画面のカルーセルスライダーを初期化
+        initSlider('.prize-slider-wrapper', {
+            isCarousel: true,
+            trackSelector: '.prize-slider-track',
+            cardSelector: '.item-card',
+            visibleCount: 5
+        });
+    });
+</script>
 
 <!DOCTYPE html>
 <html lang="ja">

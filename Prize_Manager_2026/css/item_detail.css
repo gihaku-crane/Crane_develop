@@ -238,16 +238,14 @@ body {
 
 /* --- メインレイアウト：画像とスペックの2カラム配置 --- */
 .detail-main-layout {
-    display: flex; /* または grid */
-    justify-content: center; /* 中央に寄せる */
-    gap: 40px; /* 画像とスペック表の間隔 */
-    max-width: 1200px;
-    margin: 0 auto; /* 全体を中央に */
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
 }
 
+/* ギャラリー全体のレイアウト */
 .gallery-container {
-    flex: 1;
-    max-width: 600px; /* 画像が大きくなりすぎないように制限 */
+    width: 100%;
 }
 
 /* --- 画像ギャラリー機能：クリック（チェック）で画像を切り替える仕組み --- */
@@ -256,12 +254,24 @@ input[name="gallery"] {
     display: none;
 }
 
-/* --- メイン画像の表示制御 --- */
-.main-img {
-    display: none; /* 初期状態はすべて非表示 */
-    width: 100%;
-    height: 100%;
+/* メイン画像：最初以外は隠す */
+.main-img { display: none; }
+.main-img:first-child { display: block; }
+
+/* 2. サムネイル＆ナビエリアを横並びに */
+.gallery-nav-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
 }
+
+/* ビューポート（4枚分だけ見せる） */
+.sub-img-viewport {
+    flex: 1;
+    overflow: hidden;/* はみ出た5枚目以降の画像を隠す */
+}
+
 
 .main-img img {
     width: 100%;
@@ -316,12 +326,6 @@ input[name="gallery"] {
     display: block;
 }
 
-/* サムネイル（下の4枚）の横並びコンテナ */
-.sub-img-list {
-    display: flex;           /* 横並びにする */
-    gap: 10px;               /* サムネイル間の隙間 */
-    margin-top: 15px;        /* メイン画像との距離 */
-}
 
 /* 個々のサムネイル（ラベル要素） */
 .thumb {
@@ -349,6 +353,46 @@ input[name="gallery"] {
     background-position: center; /* 中央に合わせる */
     background-repeat: no-repeat;
     background-color: #161b22;   /* 読み込みまでの下地色 */
+}
+
+/* サムネイルリスト：全画像が横一列に並ぶよう、総枚数に応じて幅を拡大する */
+.sub-img-list {
+    display: flex;
+    transition: transform 0.3s ease;
+    /* 4枚表示を基準として、総枚数分の幅にする (例: 7枚なら 7/4 * 100% = 175%) */
+    width: calc(var(--total-items, 4) * 100% / 4); 
+}
+
+.sub-img-list::-webkit-scrollbar {
+    display: none; /* Chrome/Safari用スクロールバー非表示 */
+}
+
+/* 各サムネイルのサイズを固定して4枚綺麗に収まるようにする */
+.sub-img-list .thumb {
+    flex: 0 0 calc(25% - 8px); /* 4枚並ぶように調整 */
+    box-sizing: border-box;
+}
+
+/* 各サムネイル：リスト全体に対する「1枚の割合」にする */
+.thumb-item {
+    /* 7枚なら 100% / 7 = 約14.28% の幅を、175%のリスト全体に対して割り当てる */
+    flex: 0 0 calc(100% / var(--total-items, 4));
+    padding: 2px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+
+.thumb-item img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+
+/* ホバー時に少し濃くする */
+.gallery-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
 }
 
 /* --- 3. 個別の位置指定は不要になったので削除 --- */
@@ -403,9 +447,13 @@ input[name="gallery"] {
 
 /* --- スペック情報エリア：景品の詳細データを並べる部分 --- */
 .specs-and-actions {
-    display: flex;           /* 縦に並べるためのFlexbox設定 */
-    flex-direction: column;  /* 子要素を上から下へ配置 */
-    gap: 25px;               /* 各情報ブロック間の垂直距離 */
+    flex: 0 0 340px; /* 伸縮させず、常に340pxの幅を維持する */
+}
+
+/* 右側のスペック情報・アクションエリア全体の横幅を固定・拡張する */
+.detail-main-layout .specs-and-actions {
+    width: 340px;       /* お好みの横幅（赤枠のサイズ）に合わせて微調整してください */
+    min-width: 340px;   /* 縮んでしまわないように最小幅も固定 */
 }
 
 .specs-container {

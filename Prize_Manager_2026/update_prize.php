@@ -24,6 +24,23 @@ try {
             }
         }
         
+        // ★【追加】メイン画像のURL更新（フォームから送信されている場合）
+        if (isset($_POST['main_image_url'])) {
+            $updates[] = "image_url = :main_image_url";
+            $params[':main_image_url'] = $_POST['main_image_url'];
+        }
+
+        // ★【追加】ギャラリー画像（image_url1 ～ image_url7）の更新
+        if (isset($_POST['gallery_urls']) && is_array($_POST['gallery_urls'])) {
+            $gallery_urls = $_POST['gallery_urls'];
+            for ($i = 1; $i <= 7; $i++) {
+                // 配列のインデックスは 0 から始まるので $i - 1
+                $url_value = $gallery_urls[$i - 1] ?? '';
+                $updates[] = "image_url$i = :image_url$i";
+                $params[":image_url$i"] = $url_value;
+            }
+        }
+
         if (!empty($updates)) {
             $sql = "UPDATE prizes SET " . implode(", ", $updates) . " WHERE id = :id";
             $pdo->prepare($sql)->execute($params);

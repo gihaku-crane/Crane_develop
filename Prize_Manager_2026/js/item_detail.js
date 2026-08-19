@@ -1,52 +1,108 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('JS loaded: 初期化開始');
+    const totalItems = typeof galleryImages !== 'undefined' ? galleryImages.length : 0;
+    if (totalItems === 0) return;
 
-    // --- 1. お気に入り切り替え処理 ---
-    const favBtn = document.querySelector('.js-favorite-toggle');
-    if (favBtn) { // 要素がある時だけ実行
-        favBtn.addEventListener('click', function() {
-            const prizeId = this.getAttribute('data-id');
-            const currentFav = parseInt(this.getAttribute('data-fav'));
-            const nextFav = (currentFav === 1) ? 0 : 1;
-            fetch('update_status.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `id=${prizeId}&type=is_favorite&val=${nextFav}`
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    this.setAttribute('data-fav', nextFav);
-                    this.textContent = (nextFav === 1) ? '★' : '☆';
-                }
-            });
-        });
-    }
+    let currentIndex = 0;
+    let autoPlayTimer = null;
+    const intervalTime = 4000; // 自動スライドの間隔（ミリ秒：4秒）
 
-    // --- 2. 獲得情報の切り替え ---
-    const statusBadge = document.querySelector('.js-status-toggle');
-    if (statusBadge) { // 要素がある時だけ実行
-        statusBadge.addEventListener('click', async function() {
-            console.log("現在、関数はこれに見えています:", typeof window.updatePrizeStatus);
+    const mainItems = document.querySelectorAll('.main-img');
+    const thumbItems = document.querySelectorAll('.thumb-item');
+    const subImgList = document.getElementById('subImgList');
 
-            const prizeId = this.getAttribute('data-id');
-            const currentStatus = this.getAttribute('data-status');
-            const nextStatus = (currentStatus === 'got') ? 'un' : 'got';
+    function updateGallery() {
+        // 1. CSS変数に総枚数をセット
+        if (subImgList) {
+            subImgList.style.setProperty('--total-items', totalItems);
+        }
 
-            // 共通関数を呼び出す
-            // window. をつけることで確実に読み込みに行きます
-            if (typeof window.updatePrizeStatus === 'function') {
-                const data = await window.updatePrizeStatus(prizeId, 'got_status', nextStatus);
-
-                if (data.success) {
-                    this.setAttribute('data-status', nextStatus);
-                    this.textContent = (nextStatus === 'got') ? '獲得済' : '未獲得';
-                    this.className = `js-status-toggle ${nextStatus === 'got' ? 'badge-got' : 'badge-un'}`;
-                } 
-            }else {
-                console.error("Update failed");
-                console.error("updatePrizeStatus がまだ読み込まれていません");
+        // 2. メイン画像の切り替え
+        mainItems.forEach((item, idx) => {
+            if (idx === currentIndex) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
             }
         });
+
+        // 3. サムネイルのハイライト切り替え
+        thumbItems.forEach((item, idx) => {
+            if (idx === currentIndex) {
+                item.style.border = '2px solid #00d4ff'; // アクセントカラー
+                item.style.opacity = '1';
+                item.style.backgroundColor = 'rgba(0, 212, 255, 0.1)';
+            } else {
+                item.style.border = '1px solid #30363d'; // 通常枠
+                item.style.opacity = '0.4';
+                item.style.backgroundColor = 'transparent';
+            }
+        });
+
+        // 4. サムネイル一覧の横スライド位置計算
+        const offsetPerItem = 100 / totalItems;
+        const offset = currentIndex * offsetPerItem;
+        
+        if (subImgList) {
+            subImgList.style.transform = `translateX(-${offset}%)`;
+        }
     }
+
+    // 次へ進む処理
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalItems;
+        updateGallery();
+    }
+
+    // 前へ戻る処理
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+        updateGallery();
+    }
+
+    // 自動スライドのタイマーリセット（ボタン操作時などにタイマーをリセットして仕切り直す）
+    function resetAutoPlay() {
+        clearInterval(autoPlayTimer);
+        startAutoPlay();
+    }
+
+    function startAutoPlay() {
+        // 画像が複数ある場合のみ自動スライドを有効にする
+        if (totalItems > 1) {
+            autoPlayTimer = setInterval(nextSlide, intervalTime);
+        }
+    }
+
+    // 「次へ」ボタン（>）
+    const nextBtn = document.getElementById('galleryNextBtn');
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetAutoPlay();
+        });
+    }
+
+    // 「前へ」ボタン（<）
+    const prevBtn = document.getElementById('galleryPrevBtn');
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetAutoPlay();
+        });
+    }
+
+    // 各サムネイルをクリックしたとき
+    thumbItems.forEach((thumb) => {
+        thumb.addEventListener('click', () => {
+            const idx = parseInt(thumb.getAttribute('data-index'), 10);
+            if (!isNaN(idx)) {
+                currentIndex = idx;
+                updateGallery();
+                resetAutoPlay();
+            }
+        });
+    });
+
+    // 初期化実行 ＆ 自動スライド開始
+    updateGallery();
+    startAutoPlay();
 });

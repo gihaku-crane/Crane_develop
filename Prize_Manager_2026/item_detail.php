@@ -14,4 +14,7 @@ require_once 'models/detail_model.php';
 require_once 'controllers/detail_controller.php';
 
 require_once 'views/detail_view.php';
+
+
+
 ?>

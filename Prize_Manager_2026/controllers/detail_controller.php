@@ -25,18 +25,26 @@ if (!$row) {
 $status_label = ($row['got_status'] === 'got') ? '獲得済' : '未獲得';
 $status_class = ($row['got_status'] === 'got') ? 'badge-got' : 'badge-un';
 
-// 5. ギャラリー用画像の準備
-$imgCols = ['image_url', 'image_url1', 'image_url2', 'image_url3'];
+// 5. ギャラリー用画像の準備（動的ループ版）
 $displayImages = [];
 $sample_img = 'img/gallery_sample1.png';
 
-foreach ($imgCols as $col) {
-    if (!empty($row[$col]) && $row[$col] !== 'null') {
+// 0番目（image_url）と、1〜7番目（image_url1 〜 image_url7）をループで処理
+for ($i = 0; $i <= 7; $i++) {
+    // 0番目は 'image_url'、1番目以降は 'image_url1', 'image_url2' ... となるようにする
+    $col = ($i === 0) ? 'image_url' : 'image_url' . $i;
+    
+    // カラムが存在し、データが入っており、かつ 'null' でなければ追加
+    if (isset($row[$col]) && !empty($row[$col]) && $row[$col] !== 'null') {
         $displayImages[] = $row[$col];
-    } else {
-        $displayImages[] = $sample_img;
     }
 }
+
+// もし1枚も画像が登録されていない場合のフォールバック
+if (empty($displayImages)) {
+    $displayImages[] = $sample_img;
+}
+
 
 // 6. マスタデータ・関連景品の取得
 // ※ すべて models/detail_model.php で定義した関数を使用します

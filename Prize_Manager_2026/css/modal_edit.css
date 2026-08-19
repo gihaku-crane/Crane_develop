@@ -180,3 +180,36 @@
     filter: invert(1); /* 背景が暗いので白っぽく反転 */
     cursor: pointer;
 }
+
+
+/* メイン画像・ギャラリー編集エリア用のスタイル */
+.modal-image-group {
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #2a2a2a;
+    border-radius: 4px;
+}
+
+.modal-image-group input[type="file"] {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.modal-image-group input[type="text"] {
+    width: 100%;
+}
+
+.gallery-input-row {
+    margin-bottom: 10px;
+    padding: 5px;
+    border-bottom: 1px solid #444;
+}
+
+.gallery-input-row input[type="file"] {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.gallery-input-row input[type="text"] {
+    width: 100%;
+}
